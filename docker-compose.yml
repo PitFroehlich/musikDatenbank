@@ -1,11 +1,17 @@
 version: '3'
 services:
   mysql:
+    restart: on-failure
+    hostname: localhost
     container_name: mysql
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=letmein
       - MYSQL_DATABASE=musik-datenbank
       - MYSQL_USER=user
+      - MYSQL_PASSWORD=letmein
+      - MYSQL_ROOT_HOST='%'
     ports:
-      - "3307:3307"
+      - "3006:3006"
+
+
