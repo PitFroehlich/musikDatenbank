@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     id("org.springframework.boot") version "3.1.0"
@@ -18,6 +19,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-mysql:9.8.1")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
@@ -29,7 +32,8 @@ dependencies {
 }
 
 flyway {
-    url = "jdbc:mysql://localhost:3307/mysql"
+    driver="com.mysql.jdbc.Driver"
+    url = "jdbc:mysql://localhost:3307/musik-datenbank"
     user = "root"
     password = "letmein"
 }
@@ -45,4 +49,5 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
 
