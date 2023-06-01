@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "3.1.0"
+    id("org.flywaydb.flyway") version "9.8.1"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.spring") version "1.8.21"
@@ -27,6 +28,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+flyway {
+    url = "jdbc:mysql://localhost:3307/mysql"
+    user = "root"
+    password = "letmein"
+}
 
 
 tasks.withType<KotlinCompile> {

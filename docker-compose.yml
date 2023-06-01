@@ -5,5 +5,7 @@ services:
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=letmein
+      - MYSQL_DATABASE=musik-datenbank
+      - MYSQL_USER=user
     ports:
       - "3307:3307"
