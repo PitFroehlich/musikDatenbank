@@ -1,16 +1,17 @@
 version: '3'
 services:
   flyway:
+    container_name: flyway
     image: flyway/flyway
     command: -url=jdbc:mysql://localhost:3307/db -schemas=myschema -user=root -password=letmein -connectRetries=60 migrate
     volumes:
       - .:/flyway/sql
     depends_on:
-      - db
-  db:
+      - mysql
+  mysql:
     image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=letmein
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      MYSQL_ROOT_PASSWORD: helloworld
+      MYSQL_DATABASE: testapp
     ports:
-      - 3307:3307
+      - "3308:3306"
