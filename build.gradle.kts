@@ -30,12 +30,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-flyway {
-    driver = "com.mysql.jdbc.Driver"
-    url = "jdbc:mysql://localhost:3307/db"
-    user = "root"
-    password = "letmein"
-}
+//flyway {
+//    driver = "com.mysql.jdbc.Driver"
+//    url = "jdbc:mysql://localhost:3307/db"
+//    user = "root"
+//    password = "letmein"
+//}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
