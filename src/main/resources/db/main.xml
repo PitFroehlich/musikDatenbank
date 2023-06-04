@@ -2,6 +2,27 @@
    <include file="change-log/title.xml" relativeToChangelogFile="true" />
    <include file="change-log/mood.xml" relativeToChangelogFile="true" />
    <include file="change-log/mood_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/instrument.xml" relativeToChangelogFile="true" />
+   <include file="change-log/instrument_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/public_playlist.xml" relativeToChangelogFile="true" />
+   <include file="change-log/public_playlist_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/owner.xml" relativeToChangelogFile="true" />
+   <include file="change-log/owner_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/artist.xml" relativeToChangelogFile="true" />
+   <include file="change-log/artist_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/genre.xml" relativeToChangelogFile="true" />
+   <include file="change-log/genre_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/album.xml" relativeToChangelogFile="true" />
+   <include file="change-log/album_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/presskit.xml" relativeToChangelogFile="true" />
+   <include file="change-log/presskit_album_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/audio.xml" relativeToChangelogFile="true" />
+   <include file="change-log/label.xml" relativeToChangelogFile="true" />
+   <include file="change-log/audio_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/user.xml" relativeToChangelogFile="true" />
+   <include file="change-log/download.xml" relativeToChangelogFile="true" />
+   <include file="change-log/private_playlist.xml" relativeToChangelogFile="true" />
+   <include file="change-log/private_playlist_title_link.xml" relativeToChangelogFile="true" />
 
    <include file="change-log/foreign_keys.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

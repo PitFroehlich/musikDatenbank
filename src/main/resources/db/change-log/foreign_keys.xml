@@ -2,12 +2,110 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20230603_create_foreign_key_title" author="cati">
+        <addForeignKeyConstraint baseTableName="title" baseColumnNames="label_id"
+                                 constraintName="title_label" referencedTableName="label"
+                                 referencedColumnNames="id"/>
+    </changeSet>
     <changeSet id="20230603_create_foreign_key_mood_title_link" author="cati">
         <addForeignKeyConstraint baseTableName="mood_title_link" baseColumnNames="title_id"
                                  constraintName="mood_title_link_title" referencedTableName="title"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="mood_title_link" baseColumnNames="mood_id"
                                  constraintName="mood_title_link_mood" referencedTableName="mood"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_instrument_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="instrument_title_link" baseColumnNames="title_id"
+                                 constraintName="instrument_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="instrument_title_link" baseColumnNames="instrument_id"
+                                 constraintName="instrument_title_link_instrument" referencedTableName="instrument"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_public_playlist_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="public_playlist_title_link" baseColumnNames="title_id"
+                                 constraintName="public_playlist_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="public_playlist_title_link" baseColumnNames="public_playlist_id"
+                                 constraintName="public_playlist_title_link_public_playlist"
+                                 referencedTableName="public_playlist"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_owner_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="owner_title_link" baseColumnNames="title_id"
+                                 constraintName="owner_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="owner_title_link" baseColumnNames="owner_id"
+                                 constraintName="owner_title_link_owner" referencedTableName="owner"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_artist_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="artist_title_link" baseColumnNames="title_id"
+                                 constraintName="artist_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="artist_title_link" baseColumnNames="artist_id"
+                                 constraintName="artist_title_link_artist" referencedTableName="artist"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_genre_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="genre_title_link" baseColumnNames="title_id"
+                                 constraintName="genre_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="genre_title_link" baseColumnNames="genre_id"
+                                 constraintName="genre_title_link_genre" referencedTableName="genre"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_album_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="album_title_link" baseColumnNames="title_id"
+                                 constraintName="album_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="album_title_link" baseColumnNames="album_id"
+                                 constraintName="album_title_link_album" referencedTableName="album"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_presskit_album_link" author="cati">
+        <addForeignKeyConstraint baseTableName="presskit_album_link" baseColumnNames="presskit_id"
+                                 constraintName="presskit_album_link_presskit" referencedTableName="presskit"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="presskit_album_link" baseColumnNames="album_id"
+                                 constraintName="presskit_album_link_album" referencedTableName="album"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_audio" author="cati">
+        <addForeignKeyConstraint baseTableName="audio" baseColumnNames="label_id"
+                                 constraintName="audio_label" referencedTableName="label"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_audio_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="audio_title_link" baseColumnNames="title_id"
+                                 constraintName="audio_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="audio_title_link" baseColumnNames="audio_id"
+                                 constraintName="audio_title_link_audio" referencedTableName="audio"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_download" author="cati">
+        <addForeignKeyConstraint baseTableName="download" baseColumnNames="user_id"
+                                 constraintName="download_user" referencedTableName="user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="download" baseColumnNames="audio_id"
+                                 constraintName="download_audio" referencedTableName="audio"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_private_playlist" author="cati">
+        <addForeignKeyConstraint baseTableName="private_playlist" baseColumnNames="user_id"
+                                 constraintName="private_playlist_user" referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20230604_create_foreign_key_private_playlist_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="private_playlist_title_link" baseColumnNames="title_id"
+                                 constraintName="private_playlist_title_link_title" referencedTableName="title"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="private_playlist_title_link" baseColumnNames="private_playlist_id"
+                                 constraintName="private_playlist_title_link_private_playlist"
+                                 referencedTableName="private_playlist"
                                  referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
