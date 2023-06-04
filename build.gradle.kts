@@ -33,14 +33,15 @@ dependencies {
 }
 
 openApiGenerate {
-    generatorName.set("spring")
-    inputSpec.set("src/main/resources/api.yml")
+    generatorName.set("kotlin-spring")
+    inputSpec.set((File("${projectDir}/src/main/resources/api.yml")).toString())
     outputDir.set("$buildDir/generated/openapi")
-    configFile.set("src/main/resources/openapi-config.json")
+    configOptions.set(mapOf(
+        "dateLibrary" to "java8",
+        "serializableModel" to "true",
+        "useSpringBoot3" to "true"
+    ))
 }
-
-java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
-
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -49,7 +50,17 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("$rootDir/build/generated/openapi/src/main/kotlin")
+        }
+    }
 }
 
