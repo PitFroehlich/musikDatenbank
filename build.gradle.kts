@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.0"
     id("io.spring.dependency-management") version "1.1.0"
+    id("org.openapi.generator") version "6.6.0"
+    id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
+    id("org.springframework.boot") version "3.1.0"
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.spring") version "1.8.21"
     kotlin("plugin.jpa") version "1.8.21"
@@ -17,6 +19,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springdoc:springdoc-openapi-starter-common:2.1.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
@@ -27,6 +31,16 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.liquibase:liquibase-core:4.22.0")
 }
+
+openApiGenerate {
+    generatorName.set("spring")
+    inputSpec.set("src/main/resources/api.yml")
+    outputDir.set("$buildDir/generated/openapi")
+    configFile.set("src/main/resources/openapi-config.json")
+}
+
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

@@ -1,0 +1,13 @@
+{
+  "configOptions": {
+    "dateLibrary": "java8",
+    "library": "spring-boot",
+    "oas3": "true",
+    "useSpringfox": "false",
+    "useTags": "true",
+    "interfaceOnly": "true",
+    "serializeableModel": "true",
+    "skipDefaultInterface": "true",
+    "useSpringBoot3": "true"
+  }
+}

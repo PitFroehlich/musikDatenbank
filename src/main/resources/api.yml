@@ -1,0 +1,27 @@
+openapi: "3.0.1"
+info:
+  title: OpenAPI definition
+  version: v0
+paths:
+  /mood:
+    get:
+      summary: Return all moods
+      operationId: getMood
+      tags:
+        - mood-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/MoodView'
+components:
+  schemas:
+    MoodView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
