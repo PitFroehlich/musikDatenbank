@@ -2,12 +2,12 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet id="20230603_create_foreign_key_mood_management" author="cati">
-        <addForeignKeyConstraint baseTableName="mood_management" baseColumnNames="title_id"
-                                 constraintName="mood_management_title" referencedTableName="title"
+    <changeSet id="20230603_create_foreign_key_mood_title_link" author="cati">
+        <addForeignKeyConstraint baseTableName="mood_title_link" baseColumnNames="title_id"
+                                 constraintName="mood_title_link_title" referencedTableName="title"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="mood_management" baseColumnNames="mood_id"
-                                 constraintName="mood_management_mood" referencedTableName="mood"
+        <addForeignKeyConstraint baseTableName="mood_title_link" baseColumnNames="mood_id"
+                                 constraintName="mood_title_link_mood" referencedTableName="mood"
                                  referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
