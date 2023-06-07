@@ -3,6 +3,24 @@ info:
   title: OpenAPI definition
   version: v0
 paths:
+  /title:
+    post:
+      summary: create a new title
+      tags:
+        - title-controller
+      operationId: postNewTitle
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TitleCreationDTO'
+      responses:
+        "200":
+          description: New floor created
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/TitleView'
   /mood:
     get:
       summary: Return all moods
@@ -25,3 +43,47 @@ components:
           type: integer
         name:
           type: string
+    TitleCreationDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        labelId:
+          type: integer
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        cover:
+          type: string
+          format: binary
+    TitleView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        labelId:
+          type: integer
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        cover:
+          type: string
+          format: binary
+
+
+
+
