@@ -59,7 +59,7 @@ tasks.withType<Test> {
 sourceSets {
     main {
         java {
-            srcDir("$rootDir/build/generated/openapi/src/main/kotlin")
+            srcDir("$rootDir/src/main/kotlin")
         }
     }
 }

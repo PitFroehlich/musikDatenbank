@@ -3,6 +3,43 @@ info:
   title: OpenAPI definition
   version: v0
 paths:
+  /composedBy:
+    post:
+      summary: creates relation between composer and title
+      tags:
+        - composedBy-Controller
+      operationId: postNewComposedBy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposedByDTO'
+      responses:
+        "200":
+          description: New composedBy created
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/ComposedByView'
+    get:
+      summary: get all composedBys
+      tags:
+        - composedBy-Controller
+      operationId: getComposedBy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposedByView'
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComposedByView'
   /title:
     post:
       summary: create a new title
@@ -36,6 +73,25 @@ paths:
                 $ref: '#/components/schemas/MoodView'
 components:
   schemas:
+    ComposedByDTO:
+      type: object
+      properties:
+        titleId:
+          type: integer
+        artistId:
+          type: integer
+    ComposedByView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        artistId:
+          type: integer
+
+
+
     MoodView:
       type: object
       properties:
