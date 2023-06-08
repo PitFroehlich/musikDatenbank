@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.spring") version "1.8.21"
     kotlin("plugin.jpa") version "1.8.21"
+    kotlin("kapt") version "1.5.10"
 }
 
 group = "com.htwk"
@@ -19,6 +20,9 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
     implementation("org.springdoc:springdoc-openapi-starter-common:2.1.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -39,7 +43,8 @@ openApiGenerate {
     configOptions.set(mapOf(
         "dateLibrary" to "java8",
         "serializableModel" to "true",
-        "useSpringBoot3" to "true"
+        "useSpringBoot3" to "true",
+        "modelMutable" to "true"
     ))
 }
 

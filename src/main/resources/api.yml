@@ -3,10 +3,68 @@ info:
   title: OpenAPI definition
   version: v0
 paths:
+  /audio:
+    get:
+      summary: Returns all audio files
+      operationId: getAudios
+      tags:
+        - audio-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/AudioView'
+  /public-playlist:
+    get:
+      summary: Returns all public playlists
+      operationId: getPublicPlaylists
+      tags:
+        - public-playlist-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/PublicPlaylistView'
+  /instrument:
+    get:
+      summary: Returns all instruments
+      operationId: getInstruments
+      tags:
+        - instrument-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/InstrumentView'
+  /owner-title-link:
+    get:
+      summary: Returns the owner of a title
+      operationId: getOwnerOfTitle
+      tags:
+        - owner-title-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/OwnerTitleLinkView'
   /mood:
     get:
-      summary: Return all moods
-      operationId: getMood
+      summary: Returns all moods
+      operationId: getMoods
       tags:
         - mood-controller
       responses:
@@ -15,9 +73,60 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/MoodView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoodView'
+  /owner:
+    get:
+      summary: Returns all owners of song titles
+      operationId: getOwners
+      tags:
+        - owner-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OwnerView'
 components:
   schemas:
+    AudioView:
+      type: object
+      properties:
+        id:
+          type: integer
+        labelId:
+          type: integer
+        mp3:
+          type: string
+          format: binary
+        wav:
+          type: string
+          format: binary
+    PublicPlaylistView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        text:
+          type: string
+        previewPicture:
+          type: string
+          format: binary
+        visible:
+          type: boolean
+    InstrumentView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
     MoodView:
       type: object
       properties:
@@ -25,3 +134,20 @@ components:
           type: integer
         name:
           type: string
+    OwnerView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    OwnerTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        ownerId:
+          type: integer
+

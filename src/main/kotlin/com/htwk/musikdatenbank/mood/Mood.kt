@@ -11,6 +11,11 @@ import jakarta.persistence.Id
 data class Mood(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    @Column(name = "id", updatable = false, nullable = false)
+    val id: Long,
     var name: String
-)
+) {
+//    override fun toString(): String {
+//        return "Mood(id=$id, name='$name')"
+//    }
+}

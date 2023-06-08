@@ -7,6 +7,9 @@
             <column name="label_id" type="bigint">
                 <constraints nullable="false" />
             </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="gema_nr" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
