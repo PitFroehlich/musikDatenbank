@@ -70,7 +70,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/MoodView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoodView'
 components:
   schemas:
     ComposedByDTO:
@@ -89,14 +91,12 @@ components:
           type: integer
         artistId:
           type: integer
-
-
-
     MoodView:
       type: object
       properties:
         id:
           type: integer
+          format: int64
         name:
           type: string
     TitleCreationDTO:
