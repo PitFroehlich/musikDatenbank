@@ -1,16 +1,16 @@
 package com.htwk.musikdatenbank.mood
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 
 @Entity
-data class Mood(
+class Mood(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     val id: Long? = null,
-    var name: String
+
+    @Column(name = "name")
+    var name: String = ""
+
 )

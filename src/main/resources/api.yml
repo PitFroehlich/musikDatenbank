@@ -3,6 +3,61 @@ info:
   title: OpenAPI definition
   version: v0
 paths:
+  /composedBy:
+    post:
+      summary: creates relation between composer and title
+      tags:
+        - composedBy-Controller
+      operationId: postNewComposedBy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposedByDTO'
+      responses:
+        "200":
+          description: New composedBy created
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/ComposedByView'
+    get:
+      summary: get all composedBys
+      tags:
+        - composedBy-Controller
+      operationId: getComposedBy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposedByView'
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComposedByView'
+  /title:
+    post:
+      summary: create a new title
+      tags:
+        - title-controller
+      operationId: postNewTitle
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TitleCreationDTO'
+      responses:
+        "200":
+          description: New floor created
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/TitleView'
   /mood:
     get:
       summary: Return all moods
@@ -15,13 +70,76 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/MoodView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoodView'
 components:
   schemas:
+    ComposedByDTO:
+      type: object
+      properties:
+        titleId:
+          type: integer
+        artistId:
+          type: integer
+    ComposedByView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        artistId:
+          type: integer
     MoodView:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    TitleCreationDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        labelId:
+          type: integer
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        cover:
+          type: string
+          format: binary
+    TitleView:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
+        labelId:
+          type: integer
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        cover:
+          type: string
+          format: binary
+
+
+
+

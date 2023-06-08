@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.spring") version "1.8.21"
     kotlin("plugin.jpa") version "1.8.21"
+    kotlin("kapt") version "1.9.0-Beta"
 }
 
 group = "com.htwk"
@@ -19,6 +20,9 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
     implementation("org.springdoc:springdoc-openapi-starter-common:2.1.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -39,7 +43,14 @@ openApiGenerate {
     configOptions.set(mapOf(
         "dateLibrary" to "java8",
         "serializableModel" to "true",
-        "useSpringBoot3" to "true"
+        "useSpringBoot3" to "true",
+        "library" to "spring-boot",
+        "oas3" to "true",
+        "useSpringFox" to "false",
+        "useTags" to "true",
+        "interfaceOnly" to "true",
+        "skipDefaultInterface" to "true",
+        "modelMutable" to "true"
     ))
 }
 
@@ -59,8 +70,21 @@ tasks.withType<Test> {
 sourceSets {
     main {
         java {
-            srcDir("$rootDir/build/generated/openapi/src/main/kotlin")
+            srcDirs(
+                "src/main/kotlin",
+                "build/generated/openapi/src/main/kotlin",
+                "build/generated/sources/annotationProcessor/java/main")
         }
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+        arg("mapstruct.defaultComponentModel", "spring")
     }
 }
 
