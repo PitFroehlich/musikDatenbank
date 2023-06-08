@@ -50,6 +50,7 @@ openApiGenerate {
         "useTags" to "true",
         "interfaceOnly" to "true",
         "skipDefaultInterface" to "true",
+        "modelMutable" to "true"
     ))
 }
 
@@ -79,5 +80,11 @@ sourceSets {
 
 kapt {
     correctErrorTypes = true
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+        arg("mapstruct.defaultComponentModel", "spring")
+    }
 }
 

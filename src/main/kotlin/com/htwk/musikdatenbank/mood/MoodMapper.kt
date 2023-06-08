@@ -6,6 +6,8 @@ import org.openapitools.model.MoodView
 
 @Mapper(componentModel = "spring")
 interface MoodMapper {
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
     fun toView(mood: Mood): MoodView
 
     fun toViewList(moods: List<Mood>): List<MoodView>
