@@ -11,14 +11,7 @@ import org.springframework.core.io.ByteArrayResource
 // NOTE: There is an issue with Kotlin and interfaces and the @Named annotation, that's why we use abstract classes here
 @Mapper
 abstract class PublicPlaylistConverter : Converter<PublicPlaylistView, PublicPlaylist> {
-    @Mapping(source = "previewPicture", target = "previewPicture", qualifiedByName = ["ByteToResource"])
     abstract override fun convertToView(entity: PublicPlaylist): PublicPlaylistView
 
-    @Mapping(source = "previewPicture", target = "previewPicture", qualifiedByName = ["ResourceToByte"])
     abstract override fun convertToEntity(view: PublicPlaylistView): PublicPlaylist
-    @Named("ResourceToByte")
-    fun resourceToByte(resource: Resource): ByteArray = resource.contentAsByteArray
-
-    @Named("ByteToResource")
-    fun byteToResource(bytes: ByteArray): Resource = ByteArrayResource(bytes)
 }

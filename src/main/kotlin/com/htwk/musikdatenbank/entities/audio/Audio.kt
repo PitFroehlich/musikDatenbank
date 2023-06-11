@@ -11,10 +11,8 @@ class Audio(
     @Column(name = "id", updatable = false, nullable = false)
     val id: Long,
     @ManyToOne
-    @JoinColumn(name="label_id")
+    @JoinColumn(name = "label_id")
     var label: Label,
-    @Lob
-    var wav: Blob,
-    @Lob
-    var mp3: Blob,
-    )
+    var wav: ByteArray,
+    var mp3: ByteArray,
+)

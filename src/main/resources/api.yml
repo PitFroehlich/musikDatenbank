@@ -118,10 +118,10 @@ components:
           type: integer
         mp3:
           type: string
-          format: binary
+          format: byte
         wav:
           type: string
-          format: binary
+          format: byte
     PublicPlaylistView:
       type: object
       properties:
@@ -133,7 +133,7 @@ components:
           type: string
         previewPicture:
           type: string
-          format: binary
+          format: byte
         visible:
           type: boolean
     InstrumentView:

@@ -2,7 +2,7 @@ package com.htwk.musikdatenbank.entities.label
 
 import com.htwk.musikdatenbank.services.user.UserService
 import org.mapstruct.factory.Mappers
-import org.openapitools.api.LabelApiController
+import org.openapitools.api.LabelApi
 import org.openapitools.model.LabelView
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,9 +14,8 @@ class LabelController(
     val converter: LabelConverter = Mappers.getMapper(
         LabelConverter::class.java
     )
-) : LabelApiController() {
+) : LabelApi {
 
-    @GetMapping("/label")
     override fun getLabels(): ResponseEntity<List<LabelView>> {
         val labels = userService.getAllLabels().map { converter.convertToView(it) }.toList()
 

@@ -1,5 +1,7 @@
 package com.htwk.musikdatenbank.services.music
 
+import com.htwk.musikdatenbank.entities.audio.Audio
+import com.htwk.musikdatenbank.entities.audio.AudioRepository
 import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
 import com.htwk.musikdatenbank.entities.mood.Mood
@@ -16,6 +18,7 @@ class MusicService(
     val ownerRepository: OwnerRepository,
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
+    val audioRepository: AudioRepository
 ) {
     /*------------------------------------Mood------------------------------------------------*/
     fun getAllMoods(): MutableIterable<Mood> = moodRepository.findAll()
@@ -28,5 +31,8 @@ class MusicService(
 
     /*----------------------------------Public Playlist---------------------------------------*/
     fun getAllPublicPlaylists(): MutableIterable<PublicPlaylist> = publicPlaylistRepository.findAll()
+
+    /*--------------------------------------------Audio---------------------------------------*/
+    fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
 }
