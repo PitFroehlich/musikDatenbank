@@ -3,64 +3,6 @@ info:
   title: OpenAPI definition
   version: v0
 paths:
-  /audio:
-    get:
-      summary: Returns all audio files
-      operationId: getAudios
-      tags:
-        - audio-controller
-      responses:
-        "200":
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/AudioView'
-  /public-playlist:
-    get:
-      summary: Returns all public playlists
-      operationId: getPublicPlaylists
-      tags:
-        - public-playlist-controller
-      responses:
-        "200":
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/PublicPlaylistView'
-  /instrument:
-    get:
-      summary: Returns all instruments
-      operationId: getInstruments
-      tags:
-        - instrument-controller
-      responses:
-        "200":
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/InstrumentView'
-  /owner-title-link:
-    get:
-      summary: Returns the owner of a title
-      operationId: getOwnerOfTitle
-      tags:
-        - owner-title-controller
-      responses:
-        "200":
-          description: OK
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/OwnerTitleLinkView'
   /mood:
     get:
       summary: Returns all moods
@@ -68,7 +10,7 @@ paths:
       tags:
         - mood-controller
       responses:
-        "200":
+        200:
           description: OK
           content:
             'application/json':
@@ -83,7 +25,7 @@ paths:
       tags:
         - owner-controller
       responses:
-        "200":
+        200:
           description: OK
           content:
             'application/json':
@@ -91,6 +33,80 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OwnerView'
+  /label:
+    get:
+      summary: Returns all labels
+      operationId: getLabels
+      tags:
+        - label-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelView'
+  /audio:
+    get:
+      summary: Returns all audio files
+      operationId: getAudios
+      tags:
+        - audio-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioView'
+  /public-playlist:
+    get:
+      summary: Returns all public playlists
+      operationId: getPublicPlaylists
+      tags:
+        - public-playlist-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicPlaylistView'
+  /instrument:
+    get:
+      summary: Returns all instruments
+      operationId: getInstruments
+      tags:
+        - instrument-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentView'
+  /owner-title-link:
+    get:
+      summary: Returns the owner of a title
+      operationId: getOwnerOfTitle
+      tags:
+        - owner-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/OwnerTitleLinkView'
+
 components:
   schemas:
     AudioView:
@@ -141,6 +157,19 @@ components:
           type: integer
         name:
           type: string
+    LabelView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        passwordHash:
+          type: string
+        email:
+          type: string
+        biography:
+          type: string
     OwnerTitleLinkView:
       type: object
       properties:
@@ -150,4 +179,5 @@ components:
           type: integer
         ownerId:
           type: integer
+
 

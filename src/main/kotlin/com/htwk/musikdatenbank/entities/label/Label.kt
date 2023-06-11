@@ -1,8 +1,7 @@
-package com.htwk.musikdatenbank.label
+package com.htwk.musikdatenbank.entities.label
 
-import com.htwk.musikdatenbank.audio.Audio
+import com.htwk.musikdatenbank.entities.audio.Audio
 import jakarta.persistence.*
-import jakarta.validation.constraints.Email
 
 @Entity
 class Label(
@@ -11,8 +10,7 @@ class Label(
     @Column(name = "id", updatable = false, nullable = false)
     val id: Long,
     var name: String,
-    var password: String,
-    @Email
+    var passwordHash: String,
     var email: String,
     var biography: String
 ){

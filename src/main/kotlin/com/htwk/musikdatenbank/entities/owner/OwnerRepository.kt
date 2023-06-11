@@ -1,4 +1,4 @@
-package com.htwk.musikdatenbank.owner
+package com.htwk.musikdatenbank.entities.owner
 
 import org.springframework.data.repository.CrudRepository
 

@@ -1,6 +1,6 @@
-package com.htwk.musikdatenbank.audio
+package com.htwk.musikdatenbank.entities.audio
 
-import com.htwk.musikdatenbank.label.Label
+import com.htwk.musikdatenbank.entities.label.Label
 import jakarta.persistence.*
 import java.sql.Blob
 

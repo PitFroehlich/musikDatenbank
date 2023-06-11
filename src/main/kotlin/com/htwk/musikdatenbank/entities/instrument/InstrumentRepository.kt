@@ -1,7 +1,7 @@
-package com.htwk.musikdatenbank.label
+package com.htwk.musikdatenbank.entities.instrument
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface LabelRepository: CrudRepository<Label, Long>
+interface InstrumentRepository: CrudRepository<Instrument, Long>

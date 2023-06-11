@@ -1,4 +1,4 @@
-package com.htwk.musikdatenbank.instrument
+package com.htwk.musikdatenbank.entities.instrument
 
 import jakarta.persistence.*
 

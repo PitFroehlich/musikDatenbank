@@ -1,7 +1,7 @@
 package com.htwk.musikdatenbank.services.user
 
-import com.htwk.musikdatenbank.label.Label
-import com.htwk.musikdatenbank.label.LabelRepository
+import com.htwk.musikdatenbank.entities.label.Label
+import com.htwk.musikdatenbank.entities.label.LabelRepository
 import org.springframework.stereotype.Service
 
 

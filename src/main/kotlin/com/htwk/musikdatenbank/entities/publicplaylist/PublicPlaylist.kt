@@ -1,4 +1,4 @@
-package com.htwk.musikdatenbank.publicplaylist
+package com.htwk.musikdatenbank.entities.publicplaylist
 
 import jakarta.persistence.*
 import java.sql.Blob
