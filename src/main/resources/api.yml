@@ -106,6 +106,164 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/OwnerTitleLinkView'
+  /title:
+    get:
+      summary: Returns the title
+      operationId: getTitle
+      tags:
+        - title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TitleView'
+  /artist-title-link:
+    get:
+      summary: Returns the composer of tile
+      operationId: getArtistOfTitle
+      tags:
+        - artist-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ArtistTitleLinkView'
+  /artist:
+    get:
+      summary: Returns an Artist
+      operationId: getArtist
+      tags:
+        - artist-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ArtistView'
+  /genre-title-link:
+    get:
+      summary: Returns the genres of a specific title
+      operationId: getGenreOfTitle
+      tags:
+        - genre-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/GenreTitleLinkView'
+  /genre:
+    get:
+      summary: Returns the genres of a specific title
+      operationId: getGenreOfTitle
+      tags:
+        - genre-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/GenreTitleLinkView'
+  /album-title-link:
+    get:
+      summary: Returns the titles of a specific album
+      operationId: getAlbumOfTitle
+      tags:
+        - album-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AlbumTitleLinkView'
+  /album:
+    get:
+      summary: Returns album
+      operationId: getAlbum
+      tags:
+        - album-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AlbumView'
+  /presskit:
+    get:
+      summary: Returns presskit
+      operationId: getPresskit
+      tags:
+        - presskit-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PresskitView'
+  /private-playlist-title-link:
+    get:
+      summary: Returns titles of a specific public playlist
+      operationId: getTitlesOfPrivatePlaylist
+      tags:
+        - private-playlist-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PrivatePlaylistTitleLinkView'
+  /private-playlist:
+    get:
+      summary: Returns a private playlist
+      operationId: getPrivatePlaylist
+      tags:
+        - private-playlist-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PrivatePlaylistView'
+  /user:
+    get:
+      summary: Returns a user
+      operationId: getPrivatePlaylist
+      tags:
+        - user-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserView'
+  /download:
+    get:
+      summary: Returns a download
+      operationId: getDownload
+      tags:
+        - download-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/DownloadView'
+
+
 
 components:
   schemas:
@@ -179,5 +337,140 @@ components:
           type: integer
         ownerId:
           type: integer
+    TitleView:
+      type: object
+      properties:
+        id:
+          type: integer
+        labelId:
+          type: integer
+        name:
+          type: string
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        cover:
+          type: string
+          format: byte
+    ArtistTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        artistId:
+          type: integer
+    ArtistView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        image:
+          type: string
+          format: byte
+        biography:
+          type:
+            string
+    GenreTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        genreId:
+          type: integer
+    AlbumTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        albumId:
+          type: integer
+    AlbumView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        text:
+          type: string
+        cover:
+          type: string
+          format: byte
+        releaseDate:
+          type: string
+          format: date
+    PresskitView:
+      type: object
+      properties:
+        id:
+          type: integer
+        image:
+          type: string
+          format: byte
+        pdf:
+          type: string
+          format: byte
+    PrivatePlaylistTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        privatePlaylistId:
+          type: integer
+    PrivatePlaylistView:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        name:
+          type: string
+        text:
+          type: string
+        previewPicture:
+          type: string
+          format: byte
+    UserView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        passwordHash:
+          type: string
+          format: password
+    DownloadView:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        audioId:
+          type: integer
+
+
+
 
 
