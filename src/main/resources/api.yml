@@ -118,7 +118,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/TitleView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/TitleView'
   /artist-title-link:
     get:
       summary: Returns the composer of tile
@@ -161,7 +163,7 @@ paths:
   /genre:
     get:
       summary: Returns the genres of a specific title
-      operationId: getGenreOfTitle
+      operationId: getGenre
       tags:
         - genre-controller
       responses:
@@ -239,7 +241,7 @@ paths:
   /user:
     get:
       summary: Returns a user
-      operationId: getPrivatePlaylist
+      operationId: getUser
       tags:
         - user-controller
       responses:

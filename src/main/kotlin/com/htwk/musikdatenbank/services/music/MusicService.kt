@@ -10,6 +10,8 @@ import com.htwk.musikdatenbank.entities.owner.Owner
 import com.htwk.musikdatenbank.entities.owner.OwnerRepository
 import com.htwk.musikdatenbank.entities.publicplaylist.PublicPlaylist
 import com.htwk.musikdatenbank.entities.publicplaylist.PublicPlaylistRepository
+import com.htwk.musikdatenbank.entities.title.Title
+import com.htwk.musikdatenbank.entities.title.TitleRepository
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,7 +20,7 @@ class MusicService(
     val ownerRepository: OwnerRepository,
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
-    val audioRepository: AudioRepository
+    val audioRepository: AudioRepository, private val titleRepository: TitleRepository
 ) {
     /*------------------------------------Mood------------------------------------------------*/
     fun getAllMoods(): MutableIterable<Mood> = moodRepository.findAll()
@@ -34,5 +36,8 @@ class MusicService(
 
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
+
+    /*--------------------------------------------Title---------------------------------------*/
+    fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 
 }
