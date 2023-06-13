@@ -8,6 +8,8 @@ plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.spring") version "1.8.21"
     kotlin("plugin.jpa") version "1.8.21"
+    kotlin("kapt") version "1.5.10"
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 group = "com.htwk"
@@ -19,6 +21,9 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
     implementation("org.springdoc:springdoc-openapi-starter-common:2.1.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -30,6 +35,12 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.liquibase:liquibase-core:4.22.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
+
+
+
 }
 
 openApiGenerate {
@@ -39,7 +50,9 @@ openApiGenerate {
     configOptions.set(mapOf(
         "dateLibrary" to "java8",
         "serializableModel" to "true",
-        "useSpringBoot3" to "true"
+        "useSpringBoot3" to "true",
+        "modelMutable" to "true",
+        "interfaceOnly" to "true"
     ))
 }
 

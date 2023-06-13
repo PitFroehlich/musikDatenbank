@@ -5,19 +5,144 @@ info:
 paths:
   /mood:
     get:
-      summary: Return all moods
-      operationId: getMood
+      summary: Returns all moods
+      operationId: getMoods
       tags:
         - mood-controller
       responses:
-        "200":
+        200:
           description: OK
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/MoodView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoodView'
+  /owner:
+    get:
+      summary: Returns all owners of song titles
+      operationId: getOwners
+      tags:
+        - owner-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OwnerView'
+  /label:
+    get:
+      summary: Returns all labels
+      operationId: getLabels
+      tags:
+        - label-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelView'
+  /audio:
+    get:
+      summary: Returns all audio files
+      operationId: getAudios
+      tags:
+        - audio-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioView'
+  /public-playlist:
+    get:
+      summary: Returns all public playlists
+      operationId: getPublicPlaylists
+      tags:
+        - public-playlist-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicPlaylistView'
+  /instrument:
+    get:
+      summary: Returns all instruments
+      operationId: getInstruments
+      tags:
+        - instrument-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentView'
+  /owner-title-link:
+    get:
+      summary: Returns the owner of a title
+      operationId: getOwnerOfTitle
+      tags:
+        - owner-title-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/OwnerTitleLinkView'
+
 components:
   schemas:
+    AudioView:
+      type: object
+      properties:
+        id:
+          type: integer
+        labelId:
+          type: integer
+        mp3:
+          type: string
+          format: byte
+        wav:
+          type: string
+          format: byte
+    PublicPlaylistView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        text:
+          type: string
+        previewPicture:
+          type: string
+          format: byte
+        visible:
+          type: boolean
+    InstrumentView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
     MoodView:
       type: object
       properties:
@@ -25,3 +150,34 @@ components:
           type: integer
         name:
           type: string
+    OwnerView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    LabelView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        passwordHash:
+          type: string
+        email:
+          type: string
+        biography:
+          type: string
+    OwnerTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        ownerId:
+          type: integer
+
+
