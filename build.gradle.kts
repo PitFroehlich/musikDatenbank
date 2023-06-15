@@ -83,3 +83,7 @@ tasks.named("bootRun") {
     dependsOn("openApiGenerate")
 }
 
+tasks.withType<KotlinCompile> {
+    dependsOn("openApiGenerate")
+}
+
