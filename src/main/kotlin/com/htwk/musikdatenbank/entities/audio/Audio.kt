@@ -15,4 +15,5 @@ class Audio(
     var label: Label,
     var wav: ByteArray,
     var mp3: ByteArray,
+
 )

@@ -1,6 +1,7 @@
 package com.htwk.musikdatenbank.entities.label
 
 import com.htwk.musikdatenbank.entities.audio.Audio
+import com.htwk.musikdatenbank.entities.title.Title
 import jakarta.persistence.*
 
 @Entity
@@ -16,4 +17,7 @@ class Label(
 ){
     @OneToMany(mappedBy = "label")
     private val audios: List<Audio>? = null
+
+    @OneToMany(mappedBy = "label")
+    private val titles: List<Title>? = null
 }

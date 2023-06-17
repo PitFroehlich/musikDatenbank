@@ -1,5 +1,7 @@
 package com.htwk.musikdatenbank.entities.user
 
+import com.htwk.musikdatenbank.entities.audio.Audio
+import com.htwk.musikdatenbank.entities.privateplaylist.PrivatePlaylist
 import jakarta.persistence.*
 
 @Entity
@@ -12,4 +14,7 @@ class User (
     var email: String,
     @Column(name = "password_hash")
     var passwordHash: String,
-)
+) {
+    @OneToMany(mappedBy = "user")
+    private val privatePlaylists: List<PrivatePlaylist>? = null
+}
