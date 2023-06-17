@@ -13,7 +13,7 @@ class TitleController(
     val musicService: MusicService,
     val converter: TitleConverter = Mappers.getMapper(TitleConverter::class.java)
 ) : TitleApi {
-    @GetMapping("/titles")
+
     override fun getTitles(): ResponseEntity<List<TitleView>> {
         val titles = musicService.getAllTitles().map { converter.convertToView(it) }.toList()
 
