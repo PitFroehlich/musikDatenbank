@@ -72,8 +72,18 @@ tasks.withType<Test> {
 sourceSets {
     main {
         java {
-            srcDir("$rootDir/build/generated/openapi/src/main/kotlin")
+            srcDirs("$rootDir/build/generated/openapi/src/main/kotlin", "${rootDir
+            }build/generated/sources/annotationProcessor/java/main", "${rootDir
+            }build/generated/source/kapt/main")
         }
     }
+}
+
+tasks.named("bootRun") {
+    dependsOn("openApiGenerate")
+}
+
+tasks.withType<KotlinCompile> {
+    dependsOn("openApiGenerate")
 }
 

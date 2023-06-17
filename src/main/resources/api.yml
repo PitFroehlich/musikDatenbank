@@ -108,8 +108,8 @@ paths:
                 $ref: '#/components/schemas/OwnerTitleLinkView'
   /title:
     get:
-      summary: Returns the title
-      operationId: getTitle
+      summary: Returns all titles
+      operationId: getTitles
       tags:
         - title-controller
       responses:
@@ -118,7 +118,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/TitleView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/TitleView'
   /artist-title-link:
     get:
       summary: Returns the composer of tile
@@ -134,8 +136,8 @@ paths:
                 $ref: '#/components/schemas/ArtistTitleLinkView'
   /artist:
     get:
-      summary: Returns an Artist
-      operationId: getArtist
+      summary: Returns all Artists
+      operationId: getArtists
       tags:
         - artist-controller
       responses:
@@ -144,7 +146,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/ArtistView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistView'
   /genre-title-link:
     get:
       summary: Returns the genres of a specific title
@@ -161,7 +165,7 @@ paths:
   /genre:
     get:
       summary: Returns the genres of a specific title
-      operationId: getGenreOfTitle
+      operationId: getGenres
       tags:
         - genre-controller
       responses:
@@ -170,7 +174,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/GenreTitleLinkView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenreTitleLinkView'
   /album-title-link:
     get:
       summary: Returns the titles of a specific album
@@ -186,8 +192,8 @@ paths:
                 $ref: '#/components/schemas/AlbumTitleLinkView'
   /album:
     get:
-      summary: Returns album
-      operationId: getAlbum
+      summary: Returns all albums
+      operationId: getAlbums
       tags:
         - album-controller
       responses:
@@ -196,11 +202,13 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/AlbumView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlbumView'
   /presskit:
     get:
-      summary: Returns presskit
-      operationId: getPresskit
+      summary: Returns all presskits
+      operationId: getPresskits
       tags:
         - presskit-controller
       responses:
@@ -209,7 +217,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/PresskitView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/PresskitView'
   /private-playlist-title-link:
     get:
       summary: Returns titles of a specific public playlist
@@ -225,8 +235,8 @@ paths:
                 $ref: '#/components/schemas/PrivatePlaylistTitleLinkView'
   /private-playlist:
     get:
-      summary: Returns a private playlist
-      operationId: getPrivatePlaylist
+      summary: Returns all private playlists
+      operationId: getPrivatePlaylists
       tags:
         - private-playlist-controller
       responses:
@@ -235,11 +245,13 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/PrivatePlaylistView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrivatePlaylistView'
   /user:
     get:
-      summary: Returns a user
-      operationId: getPrivatePlaylist
+      summary: Returns all users
+      operationId: getUsers
       tags:
         - user-controller
       responses:
@@ -248,11 +260,13 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/UserView'
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserView'
   /download:
     get:
-      summary: Returns a download
-      operationId: getDownload
+      summary: Returns all downloads
+      operationId: getDownloads
       tags:
         - download-controller
       responses:
