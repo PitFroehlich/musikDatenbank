@@ -12,7 +12,6 @@ class ArtistController (
     val musicService: MusicService,
     val converter: ArtistConverter = Mappers.getMapper(ArtistConverter::class.java)
 ): ArtistApi {
-    @GetMapping("/artists")
     override fun getArtists(): ResponseEntity<List<ArtistView>> {
         val artists = musicService.getAllArtists().map { converter.convertToView(it) }.toList()
         return ResponseEntity.ok(artists)
