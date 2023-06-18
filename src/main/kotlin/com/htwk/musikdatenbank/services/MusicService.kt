@@ -1,4 +1,4 @@
-package com.htwk.musikdatenbank.services.music
+package com.htwk.musikdatenbank.services
 
 import com.htwk.musikdatenbank.entities.album.Album
 import com.htwk.musikdatenbank.entities.album.AlbumRepository

@@ -1,10 +1,9 @@
 import com.htwk.musikdatenbank.entities.artist.ArtistConverter
-import com.htwk.musikdatenbank.services.music.MusicService
+import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.ArtistApi
 import org.openapitools.model.ArtistView
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController

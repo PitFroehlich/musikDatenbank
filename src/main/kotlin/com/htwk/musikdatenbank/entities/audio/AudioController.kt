@@ -1,6 +1,6 @@
 package com.htwk.musikdatenbank.entities.audio
 
-import com.htwk.musikdatenbank.services.music.MusicService
+import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.AudioApi
 import org.openapitools.model.AudioView
