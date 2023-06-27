@@ -5,6 +5,7 @@ import com.htwk.musikdatenbank.entities.album.AlbumRepository
 import com.htwk.musikdatenbank.entities.artist.Artist
 import com.htwk.musikdatenbank.entities.artist.ArtistRepository
 import com.htwk.musikdatenbank.entities.audio.Audio
+import com.htwk.musikdatenbank.entities.audio.AudioConverter
 import com.htwk.musikdatenbank.entities.audio.AudioRepository
 import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
@@ -22,6 +23,8 @@ import com.htwk.musikdatenbank.entities.title.Title
 import com.htwk.musikdatenbank.entities.title.TitleRepository
 import com.htwk.musikdatenbank.entities.user.User
 import com.htwk.musikdatenbank.entities.user.UserRepository
+import org.mapstruct.factory.Mappers
+import org.openapitools.model.AudioDTO
 import org.springframework.stereotype.Service
 
 @Service
@@ -30,11 +33,13 @@ class MusicService(
     val ownerRepository: OwnerRepository,
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
+    val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java),
     val audioRepository: AudioRepository, private val titleRepository: TitleRepository, private val artistRepository: ArtistRepository,
     private val albumRepository: AlbumRepository,
     private val presskitRepository: PresskitRepository,
     private val privatePlaylistRepository: PrivatePlaylistRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+
 ) {
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
@@ -62,7 +67,8 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
-    //fun postAudio(): Audio = audioRepository.save()
+    //convert wav to byte[]
+    fun postAudio(audioDTO: AudioDTO): Audio = audioRepository.save(audioConverter.convertToAudio(audioDTO))
 
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()

@@ -72,7 +72,8 @@ paths:
         content:
           application/json:
             schema:
-               $ref: '#/components/schemas/AudioView2'
+               $ref: '#/components/schemas/AudioDTO'
+        required: true
       responses:
         "200":
           description: Represents audio from db
@@ -326,16 +327,14 @@ components:
         wav:
           type: string
           format: byte
-    AudioView2:
+    AudioDTO:
+      required:
+        - name
+        - wav
       type: object
       properties:
-        id:
-          type: integer
-        label:
-          $ref: '#/components/schemas/LabelView'
-        mp3:
+        name:
           type: string
-          format: byte
         wav:
           type: string
           format: byte
