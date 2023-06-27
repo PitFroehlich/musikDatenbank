@@ -4,6 +4,7 @@ import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.AudioApi
 import org.openapitools.model.AudioView
+import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
@@ -18,4 +19,11 @@ class AudioController(
 
         return ResponseEntity.ok(audios)
     }
+    //take params for method from request body
+/*    override fun postAudio(name: String, audio: Resource): ResponseEntity<AudioView> {
+        //post with params
+        val audio = musicService.postAudio()
+        //return complete object
+        return ResponseEntity.ok(audio)
+    }*/
 }

@@ -62,6 +62,8 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
+    //fun postAudio(): Audio = audioRepository.save()
+
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 

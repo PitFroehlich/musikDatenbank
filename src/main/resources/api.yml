@@ -63,6 +63,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AudioView'
+    post:
+      summary: Uploads a wav file to the db
+      tags:
+        - audio-controller
+      operationId: postAudio
+      requestBody:
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/AudioView2'
+      responses:
+        "200":
+          description: Represents audio from db
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/AudioView'
   /audio-title-link:
     get:
       summary: Returns all audio files of a specific song
@@ -309,6 +326,19 @@ components:
         wav:
           type: string
           format: byte
+    AudioView2:
+      type: object
+      properties:
+        id:
+          type: integer
+        label:
+          $ref: '#/components/schemas/LabelView'
+        mp3:
+          type: string
+          format: byte
+        wav:
+          type: string
+          format: byte
     PublicPlaylistView:
       type: object
       properties:
@@ -372,7 +402,7 @@ components:
         id:
           type: integer
         label:
-         $ref: '#components/schemas/LabelView'
+         $ref: '#/components/schemas/LabelView'
         name:
           type: string
         gemaNr:
@@ -477,7 +507,7 @@ components:
         id:
           type: integer
         user:
-          $ref: '#components/schemas/UserView'
+          $ref: '#/components/schemas/UserView'
         name:
           type: string
         text:
