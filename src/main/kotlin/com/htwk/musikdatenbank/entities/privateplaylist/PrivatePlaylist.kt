@@ -17,7 +17,7 @@ class PrivatePlaylist (
     val id: Long,
     @ManyToOne
     @JoinColumn(name = "user_id")
-    var userId: User,
+    var user: User,
     var name: String,
     var text: String,
     @Column(name = "preview_picture")

@@ -13,5 +13,5 @@ class Album (
     var text: String,
     var cover: ByteArray,
     @Column(name = "release_year")
-    var releaseYear: Date,
+    var releaseDate: Date,
 )

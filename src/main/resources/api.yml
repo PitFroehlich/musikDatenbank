@@ -63,6 +63,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AudioView'
+  /audio-title-link:
+    get:
+      summary: Returns all audio files of a specific song
+      operationId: getAudioTitleLinks
+      tags:
+        - audio-title-link-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioView'
   /public-playlist:
     get:
       summary: Returns all public playlists
@@ -286,8 +301,8 @@ components:
       properties:
         id:
           type: integer
-        labelId:
-          type: integer
+        label:
+          $ref: '#/components/schemas/LabelView'
         mp3:
           type: string
           format: byte
@@ -356,8 +371,8 @@ components:
       properties:
         id:
           type: integer
-        labelId:
-          type: integer
+        label:
+         $ref: '#components/schemas/LabelView'
         name:
           type: string
         gemaNr:
@@ -438,6 +453,15 @@ components:
         pdf:
           type: string
           format: byte
+    AudioTitleLinkView:
+      type: object
+      properties:
+        id:
+          type: integer
+        titleId:
+          type: integer
+        audioId:
+          type: integer
     PrivatePlaylistTitleLinkView:
       type: object
       properties:
@@ -452,8 +476,8 @@ components:
       properties:
         id:
           type: integer
-        userId:
-          type: integer
+        user:
+          $ref: '#components/schemas/UserView'
         name:
           type: string
         text:

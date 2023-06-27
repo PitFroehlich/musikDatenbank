@@ -1,11 +1,10 @@
 package com.htwk.musikdatenbank.entities.label
 
-import com.htwk.musikdatenbank.services.user.UserService
+import com.htwk.musikdatenbank.services.UserService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.LabelApi
 import org.openapitools.model.LabelView
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
