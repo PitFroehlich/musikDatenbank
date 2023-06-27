@@ -4,7 +4,6 @@ import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.AudioApi
 import org.openapitools.model.AudioView
-import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
