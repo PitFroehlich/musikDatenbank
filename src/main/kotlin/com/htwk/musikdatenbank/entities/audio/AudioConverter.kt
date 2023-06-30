@@ -3,9 +3,7 @@ package com.htwk.musikdatenbank.entities.audio
 import com.htwk.musikdatenbank.entities.label.Label
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
-import org.openapitools.model.AudioDTO
 import org.openapitools.model.AudioView
-import org.springframework.web.multipart.MultipartFile
 
 @Mapper
 interface AudioConverter {
