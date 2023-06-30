@@ -5,6 +5,7 @@ import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.openapitools.model.AudioDTO
 import org.openapitools.model.AudioView
+import org.springframework.web.multipart.MultipartFile
 
 @Mapper
 interface AudioConverter {
@@ -14,5 +15,5 @@ interface AudioConverter {
     @Mapping(target = "id", ignore = true)
     fun convertToEntity(view: AudioView, label: Label): Audio
 
-    fun convertToAudio(dto: AudioDTO): Audio
+    fun convertToAudio(label: Label, wav: ByteArray): Audio
 }

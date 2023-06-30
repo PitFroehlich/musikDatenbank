@@ -70,10 +70,19 @@ paths:
       operationId: postAudio
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-               $ref: '#/components/schemas/AudioDTO'
-        required: true
+              type: object
+
+              properties:
+                labelId:
+                  type: integer
+                wav:
+                  type: string
+                  format: binary
+              required:
+                - labelId
+                - wav
       responses:
         "200":
           description: Represents audio from db
@@ -329,15 +338,15 @@ components:
           format: byte
     AudioDTO:
       required:
-        - name
         - wav
       type: object
       properties:
-        name:
-          type: string
+        label:
+          $ref: '#/components/schemas/LabelView'
         wav:
           type: string
           format: byte
+
     PublicPlaylistView:
       type: object
       properties:

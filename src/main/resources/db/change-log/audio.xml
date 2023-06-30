@@ -18,4 +18,13 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="20233006_update_table" author="pit">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="audio"/>
+            <columnExists tableName="audio" columnName="mp3"/>
+        </preConditions>
+        <comment>drop constraint in mp3</comment>
+        <dropNotNullConstraint tableName="audio" columnName="mp3" columnDataType="longblob"/>
+    </changeSet>
 </databaseChangeLog>

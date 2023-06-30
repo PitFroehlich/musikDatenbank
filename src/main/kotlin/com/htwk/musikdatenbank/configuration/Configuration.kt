@@ -8,5 +8,7 @@ import org.springframework.web.multipart.MultipartResolver
 class Configuration {
 /*   @Bean
     public fun multipartResolver(): MultipartResolver {
+        val mutlipartResolver = CommonsMultipartResolver()
     }*/
+    // MAybe there is a different import or dependency for kotlin
 }

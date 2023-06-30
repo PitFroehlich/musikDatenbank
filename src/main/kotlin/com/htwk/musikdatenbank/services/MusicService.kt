@@ -9,6 +9,7 @@ import com.htwk.musikdatenbank.entities.audio.AudioConverter
 import com.htwk.musikdatenbank.entities.audio.AudioRepository
 import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
+import com.htwk.musikdatenbank.entities.label.LabelRepository
 import com.htwk.musikdatenbank.entities.mood.Mood
 import com.htwk.musikdatenbank.entities.mood.MoodRepository
 import com.htwk.musikdatenbank.entities.owner.Owner
@@ -24,7 +25,7 @@ import com.htwk.musikdatenbank.entities.title.TitleRepository
 import com.htwk.musikdatenbank.entities.user.User
 import com.htwk.musikdatenbank.entities.user.UserRepository
 import org.mapstruct.factory.Mappers
-import org.openapitools.model.AudioDTO
+import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
 @Service
@@ -39,8 +40,9 @@ class MusicService(
     private val presskitRepository: PresskitRepository,
     private val privatePlaylistRepository: PrivatePlaylistRepository,
     private val userRepository: UserRepository,
+    private val labelRepository: LabelRepository,
 
-) {
+    ) {
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
 
@@ -67,8 +69,11 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
-    //convert wav to byte[]
-    fun postAudio(audioDTO: AudioDTO): Audio = audioRepository.save(audioConverter.convertToAudio(audioDTO))
+    fun postAudio(labelId: Int, wav: Resource): Audio {
+        val byteArray = wav.contentAsByteArray
+        val label = labelRepository.findById(labelId.toLong()).orElseThrow()
+        return audioRepository.save(audioConverter.convertToAudio(label, byteArray))
+    }
 
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
