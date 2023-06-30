@@ -69,6 +69,11 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
+    fun getAudioFile(audioId: String): ByteArray{
+        val audio = audioRepository.findById(audioId.toLong())
+        return audio.get().wav
+    }
+
     fun postAudio(labelId: Int, wav: Resource): Audio {
         val byteArray = wav.contentAsByteArray
         val label = labelRepository.findById(labelId.toLong()).orElseThrow()

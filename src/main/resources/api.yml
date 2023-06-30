@@ -73,7 +73,6 @@ paths:
           multipart/form-data:
             schema:
               type: object
-
               properties:
                 labelId:
                   type: integer
@@ -90,6 +89,27 @@ paths:
             "application/json":
               schema:
                 $ref: '#/components/schemas/AudioView'
+  /audio-file/{audioId}:
+    get:
+      summary: Returns specific audio file
+      operationId: getAudioFile
+      parameters:
+        - name: audioId
+          in: path
+          description: The ID of the audio file to retrieve
+          required: true
+          schema:
+            type: string
+      tags:
+        - audio-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'multipart/form-data':
+              schema:
+                type: string
+                format: byte
   /audio-title-link:
     get:
       summary: Returns all audio files of a specific song
