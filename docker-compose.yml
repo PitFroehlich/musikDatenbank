@@ -2,6 +2,7 @@ version: '3'
 services:
   mysql:
     image: mysql
+    command: --max_allowed_packet=500000000
     environment:
       MYSQL_ROOT_PASSWORD: helloworld
       MYSQL_DATABASE: musicdb

@@ -8,4 +8,7 @@ spring:
       ddl-auto: none
   liquibase:
     change-log: classpath:db/main.xml
-
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
