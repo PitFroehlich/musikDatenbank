@@ -11,7 +11,7 @@ class Label(
     @Column(name = "id", updatable = false, nullable = false)
     val id: Long,
     var name: String,
-    var passwordHash: String,
+    var password: String,
     var email: String,
     var biography: String
 ){

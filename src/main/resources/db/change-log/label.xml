@@ -22,7 +22,12 @@
         </createTable>
     </changeSet>
 
-       <changeSet id="20230611_alter_table_label" author="cati">
-           <renameColumn tableName="label" oldColumnName="passwordHash" newColumnName="password_hash" columnDataType="varchar(255)"/>
-       </changeSet>
+    <changeSet id="20230611_alter_table_label" author="cati">
+        <renameColumn tableName="label" oldColumnName="passwordHash" newColumnName="password_hash"
+                      columnDataType="varchar(255)"/>
+    </changeSet>
+    <changeSet id="20230625_alter_table_label" author="cati">
+        <renameColumn tableName="label" oldColumnName="password_hash" newColumnName="password"
+                      columnDataType="varchar(255)"/>
+    </changeSet>
 </databaseChangeLog>

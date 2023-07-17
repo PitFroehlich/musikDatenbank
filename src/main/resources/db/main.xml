@@ -19,10 +19,11 @@
    <include file="change-log/audio.xml" relativeToChangelogFile="true" />
    <include file="change-log/label.xml" relativeToChangelogFile="true" />
    <include file="change-log/audio_title_link.xml" relativeToChangelogFile="true" />
-   <include file="change-log/user.xml" relativeToChangelogFile="true" />
+   <include file="change-log/users.xml" relativeToChangelogFile="true" />
    <include file="change-log/download.xml" relativeToChangelogFile="true" />
    <include file="change-log/private_playlist.xml" relativeToChangelogFile="true" />
    <include file="change-log/private_playlist_title_link.xml" relativeToChangelogFile="true" />
+   <include file="change-log/authorities.xml" relativeToChangelogFile="true" />
 
    <include file="change-log/foreign_keys.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
