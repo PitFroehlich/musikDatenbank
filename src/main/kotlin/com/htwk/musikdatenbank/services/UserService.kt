@@ -21,7 +21,6 @@ class UserService(
 )
 //    : UserDetailsService
 {
-//    val userDetailsMapper: UserDetailsMapper = Mappers.getMapper(UserDetailsMapper::class.java)
 
     /*------------------------------------Label------------------------------------------------*/
     fun getAllLabels(): MutableIterable<Label> = labelRepository.findAll()
