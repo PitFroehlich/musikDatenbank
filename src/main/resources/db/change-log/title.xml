@@ -27,6 +27,103 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230603_add_titles" author="pit">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="title"/>
+            <columnExists tableName="title" columnName="id"/>
+            <columnExists tableName="title" columnName="label_id"/>
+            <columnExists tableName="title" columnName="name"/>
+            <columnExists tableName="title" columnName="gema_nr"/>
+            <columnExists tableName="title" columnName="bpm"/>
+            <columnExists tableName="title" columnName="release_date"/>
+            <columnExists tableName="title" columnName="visible"/>
+            <columnExists tableName="title" columnName="cover"/>
+        </preConditions>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Liebeslied"/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20230603_add_more_titles" author="pit">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="title"/>
+            <columnExists tableName="title" columnName="id"/>
+            <columnExists tableName="title" columnName="label_id"/>
+            <columnExists tableName="title" columnName="name"/>
+            <columnExists tableName="title" columnName="gema_nr"/>
+            <columnExists tableName="title" columnName="bpm"/>
+            <columnExists tableName="title" columnName="release_date"/>
+            <columnExists tableName="title" columnName="visible"/>
+            <columnExists tableName="title" columnName="cover"/>
+        </preConditions>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Rock Song "/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Emotional Rollercoaster"/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Teenage Birdsong"/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Funky Groove"/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+        <insert tableName="title">
+            <column name="label_id" value="1"/>
+            <column name="name" value="Steiniger Stein"/>
+            <column name="gema_nr" value="1111AAAA"/>
+            <column name="bpm" value="120"/>
+            <column name="release_date" value="1995-06-23"/>
+            <column name="visible" valueBoolean="true"/>
+            <column name="cover" value="Cover1111"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20230717_add_full_text_index" author="pit">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="title"/>
+            <columnExists tableName="title" columnName="id"/>
+            <columnExists tableName="title" columnName="label_id"/>
+            <columnExists tableName="title" columnName="name"/>
+            <columnExists tableName="title" columnName="gema_nr"/>
+            <columnExists tableName="title" columnName="bpm"/>
+            <columnExists tableName="title" columnName="release_date"/>
+            <columnExists tableName="title" columnName="visible"/>
+            <columnExists tableName="title" columnName="cover"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE `musicdb`.`title`
+            ADD FULLTEXT INDEX `full_text_index` (`name`) VISIBLE;
+        </sql>
+    </changeSet>
 <!--   <changeSet id="20230603_alter_table_title" author="cati">-->
 <!--       <renameColumn tableName="title" oldColumnName="title_id" newColumnName="id" columnDataType="bigint"/>-->
 <!--   </changeSet>-->

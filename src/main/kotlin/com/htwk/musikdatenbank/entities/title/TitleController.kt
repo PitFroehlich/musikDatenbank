@@ -18,6 +18,12 @@ class TitleController(
 
         return ResponseEntity.ok(titles)
     }
+
+    override fun searchTitles(keyword: String?): ResponseEntity<List<TitleView>> {
+        val titles = musicService.searchTitle(keyword).map { converter.convertToView(it) }.toList()
+
+        return ResponseEntity.ok(titles)
+    }
 }
 
 
