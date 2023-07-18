@@ -26,9 +26,6 @@ import com.htwk.musikdatenbank.entities.user.User
 import com.htwk.musikdatenbank.entities.user.UserRepository
 import org.mapstruct.factory.Mappers
 import org.springframework.core.io.Resource
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -85,7 +82,6 @@ class MusicService(
 
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
-    val SEARCH_RESULT_PER_PAGE = 10
 
     fun searchTitle(keyword: String?): Iterable<Title> {
         return if (keyword != null) {
