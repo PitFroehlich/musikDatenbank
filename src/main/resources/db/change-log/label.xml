@@ -37,7 +37,7 @@
             <tableExists tableName="label" />
             <columnExists tableName="label" columnName="id" />
             <columnExists tableName="label" columnName="name" />
-            <columnExists tableName="label" columnName="password_hash" />
+            <columnExists tableName="label" columnName="password" />
             <columnExists tableName="label" columnName="email" />
             <columnExists tableName="label" columnName="biography" />
         </preConditions>
