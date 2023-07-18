@@ -83,6 +83,14 @@ class MusicService(
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 
+    fun searchTitle(keyword: String?): Iterable<Title> {
+        return if (keyword != null) {
+            titleRepository.search(keyword)
+        } else {
+            titleRepository.findAll()
+        }
+    }
+
     /*--------------------------------------------User----------------------------------------*/
     fun getAllUsers(): MutableIterable<Users> = usersRepository.findAll()
 

@@ -43,7 +43,7 @@
         </preConditions>
         <insert tableName="label">
             <column name="name" value="LabelEins" />
-            <column name="password_hash" value="123" />
+            <column name="password" value="123" />
             <column name="email" value="label@label1.de" />
             <column name="biography" value="Dies ist ein sehr nices Label." />
         </insert>
