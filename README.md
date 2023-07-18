@@ -9,3 +9,6 @@ To generate:
 ````
 ./gradlew clean openApiGenerate
 
+## Frontend Application
+The Frontend was written with Angular 16 and can be found at https://github.com/cat-thimm/music-storage
+
