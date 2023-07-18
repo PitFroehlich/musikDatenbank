@@ -40,22 +40,22 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
-
-
-
+    implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 openApiGenerate {
     generatorName.set("kotlin-spring")
     inputSpec.set((File("${projectDir}/src/main/resources/api.yml")).toString())
     outputDir.set("$buildDir/generated/openapi")
-    configOptions.set(mapOf(
-        "dateLibrary" to "java8",
-        "serializableModel" to "true",
-        "useSpringBoot3" to "true",
-        "modelMutable" to "true",
-        "interfaceOnly" to "true"
-    ))
+    configOptions.set(
+        mapOf(
+            "dateLibrary" to "java8",
+            "serializableModel" to "true",
+            "useSpringBoot3" to "true",
+            "modelMutable" to "true",
+            "interfaceOnly" to "true"
+        )
+    )
 }
 
 tasks.withType<KotlinCompile> {
@@ -74,9 +74,13 @@ tasks.withType<Test> {
 sourceSets {
     main {
         java {
-            srcDirs("$rootDir/build/generated/openapi/src/main/kotlin", "${rootDir
-            }build/generated/sources/annotationProcessor/java/main", "${rootDir
-            }build/generated/source/kapt/main")
+            srcDirs(
+                "$rootDir/build/generated/openapi/src/main/kotlin", "${
+                    rootDir
+                }build/generated/sources/annotationProcessor/java/main", "${
+                    rootDir
+                }build/generated/source/kapt/main"
+            )
         }
     }
 }

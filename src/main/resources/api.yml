@@ -2,7 +2,27 @@ openapi: "3.0.1"
 info:
   title: OpenAPI definition
   version: v0
+security:
+  - BasicAuth: [ ]
 paths:
+  /login:
+    post:
+      summary: Logs in user
+      operationId: login
+      tags:
+        - user-controller
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AuthenticationView'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserView'
   /mood:
     get:
       summary: Returns all moods
@@ -325,6 +345,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserView'
+    post:
+      summary: Creates user
+      operationId: createUser
+      tags:
+        - user-controller
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserView'
+      responses:
+        201:
+          description: 'User created.'
   /download:
     get:
       summary: Returns all downloads
@@ -342,7 +375,18 @@ paths:
 
 
 components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
   schemas:
+    AuthenticationView:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
     AudioView:
       type: object
       properties:
@@ -409,7 +453,7 @@ components:
           type: integer
         name:
           type: string
-        passwordHash:
+        password:
           type: string
         email:
           type: string
@@ -546,16 +590,17 @@ components:
     UserView:
       type: object
       properties:
-        id:
-          type: integer
-        name:
+        username:
           type: string
         email:
           type: string
           format: email
-        passwordHash:
+        password:
           type: string
           format: password
+        role:
+          type: string
+          enum: [ 'LABEL', 'USER' ]
     DownloadView:
       type: object
       properties:

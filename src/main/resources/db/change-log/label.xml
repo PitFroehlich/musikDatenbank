@@ -1,45 +1,51 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="20230604_create_table_label" author="cati">
         <createTable tableName="label">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="passwordHash" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="email" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="biography" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
         </createTable>
     </changeSet>
 
-       <changeSet id="20230611_alter_table_label" author="cati">
-           <renameColumn tableName="label" oldColumnName="passwordHash" newColumnName="password_hash" columnDataType="varchar(255)"/>
-       </changeSet>
+    <changeSet id="20230611_alter_table_label" author="cati">
+        <renameColumn tableName="label" oldColumnName="passwordHash" newColumnName="password_hash"
+            columnDataType="varchar(255)" />
+    </changeSet>
+    <changeSet id="20230625_alter_table_label" author="cati">
+        <renameColumn tableName="label" oldColumnName="password_hash" newColumnName="password"
+            columnDataType="varchar(255)" />
+    </changeSet>
 
     <changeSet id="20230630_insert_label" author="pit">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="label"/>
-            <columnExists tableName="label" columnName="id"/>
-            <columnExists tableName="label" columnName="name"/>
-            <columnExists tableName="label" columnName="password_hash"/>
-            <columnExists tableName="label" columnName="email"/>
-            <columnExists tableName="label" columnName="biography"/>
+            <tableExists tableName="label" />
+            <columnExists tableName="label" columnName="id" />
+            <columnExists tableName="label" columnName="name" />
+            <columnExists tableName="label" columnName="password_hash" />
+            <columnExists tableName="label" columnName="email" />
+            <columnExists tableName="label" columnName="biography" />
         </preConditions>
         <insert tableName="label">
-            <column name="name" value="LabelEins"/>
-            <column name="password_hash" value="123"/>
-            <column name="email" value="label@label1.de"/>
-            <column name="biography" value="Dies ist ein sehr nices Label."/>
+            <column name="name" value="LabelEins" />
+            <column name="password_hash" value="123" />
+            <column name="email" value="label@label1.de" />
+            <column name="biography" value="Dies ist ein sehr nices Label." />
         </insert>
     </changeSet>
 </databaseChangeLog>
