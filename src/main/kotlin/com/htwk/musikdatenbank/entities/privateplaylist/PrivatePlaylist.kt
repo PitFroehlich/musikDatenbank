@@ -1,6 +1,6 @@
 package com.htwk.musikdatenbank.entities.privateplaylist
 
-import com.htwk.musikdatenbank.entities.user.User
+import com.htwk.musikdatenbank.entities.user.Users
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -16,8 +16,8 @@ class PrivatePlaylist (
     @Column(name = "id", updatable = false, nullable = false)
     val id: Long,
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    var user: User,
+    @JoinColumn(name = "username")
+    var users: Users,
     var name: String,
     var text: String,
     @Column(name = "preview_picture")

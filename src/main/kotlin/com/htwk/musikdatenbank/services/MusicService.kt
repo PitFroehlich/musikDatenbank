@@ -22,8 +22,8 @@ import com.htwk.musikdatenbank.entities.publicplaylist.PublicPlaylist
 import com.htwk.musikdatenbank.entities.publicplaylist.PublicPlaylistRepository
 import com.htwk.musikdatenbank.entities.title.Title
 import com.htwk.musikdatenbank.entities.title.TitleRepository
-import com.htwk.musikdatenbank.entities.user.User
-import com.htwk.musikdatenbank.entities.user.UserRepository
+import com.htwk.musikdatenbank.entities.user.Users
+import com.htwk.musikdatenbank.entities.user.UsersRepository
 import org.mapstruct.factory.Mappers
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
@@ -39,7 +39,7 @@ class MusicService(
     private val albumRepository: AlbumRepository,
     private val presskitRepository: PresskitRepository,
     private val privatePlaylistRepository: PrivatePlaylistRepository,
-    private val userRepository: UserRepository,
+    private val usersRepository: UsersRepository,
     private val labelRepository: LabelRepository,
 
     ) {
@@ -92,6 +92,6 @@ class MusicService(
     }
 
     /*--------------------------------------------User----------------------------------------*/
-    fun getAllUsers(): MutableIterable<User> = userRepository.findAll()
+    fun getAllUsers(): MutableIterable<Users> = usersRepository.findAll()
 
 }

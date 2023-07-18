@@ -86,17 +86,17 @@
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="20230604_create_foreign_key_download" author="cati">
-        <addForeignKeyConstraint baseTableName="download" baseColumnNames="user_id"
-                                 constraintName="download_user" referencedTableName="user"
-                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="download" baseColumnNames="username"
+                                 constraintName="download_user" referencedTableName="users"
+                                 referencedColumnNames="username"/>
         <addForeignKeyConstraint baseTableName="download" baseColumnNames="audio_id"
                                  constraintName="download_audio" referencedTableName="audio"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="20230604_create_foreign_key_private_playlist" author="cati">
-        <addForeignKeyConstraint baseTableName="private_playlist" baseColumnNames="user_id"
-                                 constraintName="private_playlist_user" referencedTableName="user"
-                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="private_playlist" baseColumnNames="username"
+                                 constraintName="private_playlist_user" referencedTableName="users"
+                                 referencedColumnNames="username"/>
     </changeSet>
 
     <changeSet id="20230604_create_foreign_key_private_playlist_title_link" author="cati">
@@ -107,5 +107,10 @@
                                  constraintName="private_playlist_title_link_private_playlist"
                                  referencedTableName="private_playlist"
                                  referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230604_create_foreign_key_user_authority" author="cati">
+        <addForeignKeyConstraint baseTableName="authorities" baseColumnNames="username"
+                                 constraintName="fk_authorities_users" referencedTableName="users"
+                                 referencedColumnNames="username"/>
     </changeSet>
 </databaseChangeLog>
