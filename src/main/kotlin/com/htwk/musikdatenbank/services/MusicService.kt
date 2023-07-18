@@ -34,7 +34,6 @@ class MusicService(
     val ownerRepository: OwnerRepository,
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
-    val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java),
     val audioRepository: AudioRepository, private val titleRepository: TitleRepository, private val artistRepository: ArtistRepository,
     private val albumRepository: AlbumRepository,
     private val presskitRepository: PresskitRepository,
@@ -43,6 +42,7 @@ class MusicService(
     private val labelRepository: LabelRepository,
 
     ) {
+    val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
 

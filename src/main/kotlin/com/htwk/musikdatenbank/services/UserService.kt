@@ -10,6 +10,7 @@ import org.openapitools.model.AuthenticationView
 import org.openapitools.model.UserView
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 
 @Service
@@ -52,12 +53,13 @@ class UserService(
         val authorities = authoritiesRepository.findAllByUsername(username)
 
         val user = usersRepository.findByUsername(username)
-
+        
         return UserView(
             username = username,
             password = user.password,
             email = user.email,
-            role = UserView.Role.valueOf(authorities.firstOrNull()!!.authority.removePrefix("ROLE_"))
+            role = UserView.Role.valueOf(authorities.firstOrNull()!!.authority.removePrefix("ROLE_")
+                .replaceFirstChar { it.lowercase(Locale.getDefault()) })
         )
     }
 }
