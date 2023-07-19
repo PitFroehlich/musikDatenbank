@@ -12,4 +12,255 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="20230719_add_downloads" author="pit">
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User7"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User8"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User9"/>
+            <column name="audio_id" value="1"/>
+            <column name="username" value="User10"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20230719_add_downloads2" author="pit">
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User7"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User8"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <!--====AUDIO 2==============================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User7"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User8"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User9"/>
+            <column name="audio_id" value="2"/>
+            <!--AUDIO 3============================================================================================-->
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User7"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User8"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <!--AUDIO 4================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User7"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <!--AUDIO 5=================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User6"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <!--AUDIO 6=================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User5"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <!--AUDIO 7=================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="7"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="7"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="7"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User4"/>
+            <column name="audio_id" value="7"/>
+        </insert>
+        <!--AUDIO 8==================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="8"/>
+        </insert>
+
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="8"/>
+        </insert>
+
+        <insert tableName="download">
+            <column name="username" value="User3"/>
+            <column name="audio_id" value="8"/>
+        </insert>
+        <!--AUDIO 9=================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="9"/>
+        </insert>
+        <insert tableName="download">
+            <column name="username" value="User2"/>
+            <column name="audio_id" value="9"/>
+        </insert>
+        <!--AUDIO 10================================================================================================-->
+        <insert tableName="download">
+            <column name="username" value="User1"/>
+            <column name="audio_id" value="10"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
