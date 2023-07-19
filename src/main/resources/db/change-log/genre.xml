@@ -12,4 +12,19 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="20230719_adding_genres" author="pit">
+        <insert tableName="genre">
+            <column name="name" value="Rock"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Pop"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Techno"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Jazz"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
