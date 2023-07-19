@@ -272,6 +272,26 @@
             <column name="cover" value="Cover1111"/>
         </insert>
     </changeSet>
+    <changeSet id="20230719" author="pit">
+        <insert tableName="title">
+                <column name="label_id" value="1"/>
+                <column name="name" value="Mama Bear Mama"/>
+                <column name="gema_nr" value="1111AAAA"/>
+                <column name="bpm" value="120"/>
+                <column name="release_date" value="1995-06-23"/>
+                <column name="visible" valueBoolean="true"/>
+                <column name="cover" value="Cover1111"/>
+        </insert>
+        <insert tableName="title">
+                <column name="label_id" value="1"/>
+                <column name="name" value="Papa Bear Papa"/>
+                <column name="gema_nr" value="1111AAAA"/>
+                <column name="bpm" value="120"/>
+                <column name="release_date" value="1995-06-23"/>
+                <column name="visible" valueBoolean="true"/>
+                <column name="cover" value="Cover1111"/>
+        </insert>
+    </changeSet>
 <!--   <changeSet id="20230603_alter_table_title" author="cati">-->
 <!--       <renameColumn tableName="title" oldColumnName="title_id" newColumnName="id" columnDataType="bigint"/>-->
 <!--   </changeSet>-->

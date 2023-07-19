@@ -113,6 +113,7 @@ class MusicService(
                 ) {
                     val keywordSeperated = keyword.split(" ").toTypedArray()
                     val searchString = keywordSeperated.joinToString(" ") { "+$it" }
+                    print("THIS IS THE SEARCH STRING " + searchString + " THIS WAS THE STRING")
                     return titleRepository.search(searchString)
                 } else {
                     return titleRepository.findAll()

@@ -7,26 +7,9 @@ import org.springframework.data.repository.PagingAndSortingRepository
 interface TitleRepository :
     CrudRepository<Title, Long>,
     PagingAndSortingRepository<Title, Long> {
-    @Query(
-        value = "SELECT t.* FROM title t WHERE MATCH(t.name) AGAINST (?1 IN BOOLEAN MODE) ORDER BY MATCH(t.name) AGAINST (?1 IN BOOLEAN MODE) DESC",
-        nativeQuery = true
-    )
+
+    @Query(value = "SELECT * FROM title t WHERE MATCH(name) AGAINST (?1 IN BOOLEAN MODE) ORDER BY MATCH(t.name) AGAINST (?1 IN BOOLEAN MODE) ASC", nativeQuery = true)
     fun search(keyword: String): List<Title>
-
-    /*    fun search(
-            tempo: Int?,
-            mood: List<Int>?,
-            genre: List<Int>?,
-            instrument: List<Int>?
-        ): List<Title>*/
-
-    /*    fun search(
-            keyword: String?,
-            tempo: Int?,
-            mood: List<Int>?,
-            genre: List<Int>?,
-            instrument: List<Int>?
-        ): List<Title>*/
 
     @Query(
         value = "SELECT t.* " +
