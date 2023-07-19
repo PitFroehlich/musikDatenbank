@@ -12,4 +12,26 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_added_public_playlists_title_link" author="pit">
+        <insert tableName="public_playlist_title_link">
+            <column name="title_id" value="1"/>
+            <column name="public_playlist_id" value="1"/>
+        </insert>
+        <insert tableName="public_playlist_title_link">
+            <column name="title_id" value="2"/>
+            <column name="public_playlist_id" value="1"/>
+        </insert>
+        <insert tableName="public_playlist_title_link">
+            <column name="title_id" value="3"/>
+            <column name="public_playlist_id" value="1"/>
+        </insert>
+        <insert tableName="public_playlist_title_link">
+            <column name="title_id" value="4"/>
+            <column name="public_playlist_id" value="1"/>
+        </insert>
+        <insert tableName="public_playlist_title_link">
+            <column name="title_id" value="5"/>
+            <column name="public_playlist_id" value="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

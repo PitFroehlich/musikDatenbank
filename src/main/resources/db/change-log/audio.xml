@@ -27,4 +27,63 @@
         <comment>drop constraint in mp3</comment>
         <dropNotNullConstraint tableName="audio" columnName="mp3" columnDataType="longblob"/>
     </changeSet>
+
+    <changeSet id="20230719_insert_dummy_audios" author="pit">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="audio"/>
+            <columnExists tableName="audio" columnName="mp3"/>
+        </preConditions>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+        <insert tableName="audio">
+            <column name="label_id" value="1"/>
+            <column name="wav" value="123123123"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

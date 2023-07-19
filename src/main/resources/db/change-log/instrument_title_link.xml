@@ -12,4 +12,47 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_added_public_instrument_title_link" author="pit">
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="1"/>
+            <column name="instrument_id" value="1"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="2"/>
+            <column name="instrument_id" value="1"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="3"/>
+            <column name="instrument_id" value="1"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="4"/>
+            <column name="instrument_id" value="2"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="5"/>
+            <column name="instrument_id" value="2"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="6"/>
+            <column name="instrument_id" value="2"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="7"/>
+            <column name="instrument_id" value="3"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="8"/>
+            <column name="instrument_id" value="3"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="9"/>
+            <column name="instrument_id" value="3"/>
+        </insert>
+        <insert tableName="instrument_title_link">
+            <column name="title_id" value="10"/>
+            <column name="instrument_id" value="3"/>
+        </insert>
+
+    </changeSet>
 </databaseChangeLog>

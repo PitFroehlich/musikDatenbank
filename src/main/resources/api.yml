@@ -232,6 +232,35 @@ paths:
           schema:
             type: string
           description: the term you want to search for
+        - name: tempo
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: the song tempo you search for
+        - name: mood
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: genre
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: instrument
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+
+          description: the song tempo you search for
       responses:
         200:
           description: OK
@@ -448,6 +477,21 @@ components:
         wav:
           type: string
           format: byte
+    MoodDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+    GenreDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+    InstrumentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
 
     PublicPlaylistView:
       type: object

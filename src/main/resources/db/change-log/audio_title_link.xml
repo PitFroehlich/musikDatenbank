@@ -12,4 +12,59 @@
             </column>
         </createTable>
     </changeSet>
+    
+    <changeSet id="20230719_added_audio_title_links" author="pit">
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="1"/>
+            <column name="audio_id" value="1"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="2"/>
+            <column name="audio_id" value="2"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="3"/>
+            <column name="audio_id" value="3"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="4"/>
+            <column name="audio_id" value="4"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="5"/>
+            <column name="audio_id" value="5"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="6"/>
+            <column name="audio_id" value="6"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="7"/>
+            <column name="audio_id" value="7"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="8"/>
+            <column name="audio_id" value="8"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="9"/>
+            <column name="audio_id" value="9"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="10"/>
+            <column name="audio_id" value="10"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="11"/>
+            <column name="audio_id" value="11"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="12"/>
+            <column name="audio_id" value="12"/>
+        </insert>
+        <insert tableName="audio_title_link">
+            <column name="title_id" value="13"/>
+            <column name="audio_id" value="13"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

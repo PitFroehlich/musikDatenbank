@@ -13,5 +13,7 @@ interface AudioConverter {
     @Mapping(target = "id", ignore = true)
     fun convertToEntity(view: AudioView, label: Label): Audio
 
+    @Mapping(target = "label")
+    @Mapping(target = "wav")
     fun convertToAudio(label: Label, wav: ByteArray): Audio
 }

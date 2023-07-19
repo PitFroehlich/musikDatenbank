@@ -9,4 +9,15 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_adding_moods" author="pit">
+        <insert tableName="mood">
+            <column name="name" value="Happy"/>
+        </insert>
+        <insert tableName="mood">
+            <column name="name" value="Sad"/>
+        </insert>
+        <insert tableName="mood">
+            <column name="name" value="Angry"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
