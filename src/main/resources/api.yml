@@ -214,7 +214,7 @@ paths:
         - title-controller
       parameters:
         - name: keyword
-          in: query
+          in: path
           required: false
           schema:
             type: string
