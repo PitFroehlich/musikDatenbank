@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class TitleController(
     val musicService: MusicService,
-    val converter: TitleConverter = Mappers.getMapper(TitleConverter::class.java)
 ) : TitleApi {
+    val converter: TitleConverter = Mappers.getMapper(TitleConverter::class.java)
 
     override fun getTitles(): ResponseEntity<List<TitleView>> {
         val titles = musicService.getAllTitles().map { converter.convertToView(it) }.toList()

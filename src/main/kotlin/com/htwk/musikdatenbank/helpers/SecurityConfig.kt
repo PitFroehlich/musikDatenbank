@@ -1,10 +1,10 @@
 package com.htwk.musikdatenbank.helpers
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Description
 import org.springframework.context.annotation.Primary
+import org.springframework.core.Ordered
+import org.springframework.core.annotation.Order
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -28,7 +28,6 @@ import javax.sql.DataSource
 class SecurityConfig() {
     @Bean
     @Primary
-
     fun users(dataSource: DataSource, passwordEncoder: PasswordEncoder): UserDetailsService? {
         return JdbcUserDetailsManager(dataSource)
     }
@@ -38,8 +37,8 @@ class SecurityConfig() {
         return BCryptPasswordEncoder()
     }
 
+    private val corsOriginPatterns: String = "http://localhost:4200, http://localhost:8080"
 
-    private val corsOriginPatterns: String = "*"
     @Bean
     fun addCorsConfig(): WebMvcConfigurer {
         return object : WebMvcConfigurer {
@@ -49,34 +48,44 @@ class SecurityConfig() {
                     .allowedMethods("*")
                     .allowedOriginPatterns(*allowedOrigins)
                     .allowCredentials(true)
+                    .allowedHeaders("authorization", "content-type")
             }
         }
     }
 
-
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("*")
-        configuration.allowedMethods = listOf("GET", "POST")
+        configuration.allowedOrigins = listOf("http://localhost:4200", "http://localhost:8080")
+        configuration.allowedMethods = listOf(
+            "GET", "POST", "PUT", "PATCH",
+            "DELETE", "OPTIONS"
+        )
+        configuration.allowedOriginPatterns = listOf("http://localhost:4200", "http://localhost:8080")
         configuration.allowCredentials = true
+        configuration.allowedHeaders = listOf(
+            "authorization", "content-type",
+        )
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", configuration)
         return source
     }
 
-
     @Bean
     @Throws(Exception::class)
     fun filterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
-        httpSecurity.csrf {
-            it.disable()
-        }
+        httpSecurity
+            .cors {  }
+            .csrf {
+                it.disable()
+            }
             .authorizeHttpRequests { request ->
                 request.requestMatchers("/user", "/login").permitAll().anyRequest().authenticated()
             }
             .httpBasic(Customizer.withDefaults())
-            .cors { it.disable() }
+
+
+
 
         return httpSecurity.build()
     }
