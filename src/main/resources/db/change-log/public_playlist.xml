@@ -18,4 +18,12 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_added_public_playlists" author="pit">
+        <insert tableName="public_playlist">
+            <column name="name" value="Happy Songs"/>
+            <column name="text" value="This is my playlist of happy songs."/>
+            <column name="preview_picture" value="Awesome Picture"/>
+            <column name="visible" valueBoolean="true"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
