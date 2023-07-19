@@ -3,9 +3,6 @@ package com.htwk.musikdatenbank.entities.title
 import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.TitleApi
-import org.openapitools.model.GenreDTO
-import org.openapitools.model.InstrumentDTO
-import org.openapitools.model.MoodDTO
 import org.openapitools.model.TitleView
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
