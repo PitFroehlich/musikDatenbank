@@ -12,4 +12,46 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_added_public_mood_title_link" author="pit">
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="1"/>
+        <column name="mood_id" value="2"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="2"/>
+        <column name="mood_id" value="2"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="3"/>
+        <column name="mood_id" value="2"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="4"/>
+        <column name="mood_id" value="3"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="5"/>
+        <column name="mood_id" value="3"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="6"/>
+        <column name="mood_id" value="3"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="7"/>
+        <column name="mood_id" value="3"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="8"/>
+        <column name="mood_id" value="4"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="9"/>
+        <column name="mood_id" value="4"/>
+    </insert>
+    <insert tableName="mood_title_link">
+        <column name="title_id" value="10"/>
+        <column name="mood_id" value="4"/>
+    </insert>
+    </changeSet>
 </databaseChangeLog>
