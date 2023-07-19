@@ -71,6 +71,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LabelView'
+    post:
+      summary: Creates a new label
+      operationId: createLabel
+      tags:
+        - label-controller
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/LabelView'
+      responses:
+        201:
+          description: 'Label created.'
   /audio:
     get:
       summary: Returns all audio files
