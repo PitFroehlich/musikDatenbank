@@ -9,4 +9,18 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230719_adding_instruments" author="pit">
+        <insert tableName="instrument">
+            <column name="name" value="Guitar"/>
+        </insert>
+        <insert tableName="instrument">
+            <column name="name" value="Drums"/>
+        </insert>
+        <insert tableName="instrument">
+            <column name="name" value="Bass"/>
+        </insert>
+        <insert tableName="instrument">
+            <column name="name" value="Keyboard"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
