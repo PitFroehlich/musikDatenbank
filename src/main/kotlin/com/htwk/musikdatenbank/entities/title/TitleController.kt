@@ -3,6 +3,9 @@ package com.htwk.musikdatenbank.entities.title
 import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
 import org.openapitools.api.TitleApi
+import org.openapitools.model.GenreDTO
+import org.openapitools.model.InstrumentDTO
+import org.openapitools.model.MoodDTO
 import org.openapitools.model.TitleView
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -19,11 +22,17 @@ class TitleController(
         return ResponseEntity.ok(titles)
     }
 
-    override fun searchTitles(keyword: String?): ResponseEntity<List<TitleView>> {
-        val titles = musicService.searchTitle(keyword).map { converter.convertToView(it) }.toList()
+    override fun searchTitles(
+        keyword: String?,
+        tempo: Int?,
+        mood: List<Int>?,
+        genre: List<Int>?,
+        instrument: List<Int>?
+    ): ResponseEntity<List<TitleView>> {
+        val titles =
+            musicService.searchTitle(keyword, tempo, mood, genre, instrument).map { converter.convertToView(it) }
+                .toList()
 
         return ResponseEntity.ok(titles)
     }
 }
-
-

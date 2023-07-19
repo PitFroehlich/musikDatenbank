@@ -34,7 +34,9 @@ class MusicService(
     val ownerRepository: OwnerRepository,
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
-    val audioRepository: AudioRepository, private val titleRepository: TitleRepository, private val artistRepository: ArtistRepository,
+    val audioRepository: AudioRepository,
+    private val titleRepository: TitleRepository,
+    private val artistRepository: ArtistRepository,
     private val albumRepository: AlbumRepository,
     private val presskitRepository: PresskitRepository,
     private val privatePlaylistRepository: PrivatePlaylistRepository,
@@ -43,11 +45,13 @@ class MusicService(
 
     ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
+
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
 
     /*--------------------------------------------Artist---------------------------------------*/
     fun getAllArtists(): MutableIterable<Artist> = artistRepository.findAll()
+
     /*------------------------------------Mood------------------------------------------------*/
     fun getAllMoods(): MutableIterable<Mood> = moodRepository.findAll()
 
@@ -69,7 +73,7 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
-    fun getAudioFile(audioId: String): ByteArray{
+    fun getAudioFile(audioId: String): ByteArray {
         val audio = audioRepository.findById(audioId.toLong())
         return audio.get().wav
     }
@@ -83,11 +87,39 @@ class MusicService(
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 
-    fun searchTitle(keyword: String?): Iterable<Title> {
-        return if (keyword.isNullOrEmpty()) {
-            titleRepository.showMostPopular()
+    fun searchTitle(
+        keyword: String?,
+        tempo: Int?,
+        mood: List<Int>?,
+        genre: List<Int>?,
+        instrument: List<Int>?
+    ): Iterable<Title> {
+         if (
+            keyword.isNullOrEmpty()
+            && mood.toString().isNullOrEmpty()
+            && genre.toString().isNullOrEmpty()
+            && instrument.toString().isNullOrEmpty()
+        ) {
+             return titleRepository.showMostPopular()
         } else {
-            titleRepository.search(keyword)
+             if (keyword.isNullOrEmpty()) {
+                //titleRepository.search(tempo, mood, genre, instrument)
+
+                 return titleRepository.findAll()
+            } else {
+                if (mood.isNullOrEmpty()
+                    && genre.isNullOrEmpty()
+                    && instrument.isNullOrEmpty()
+                ) {
+                    val keywordSeperated = keyword.split(" ").toTypedArray()
+                    val searchString = keywordSeperated.joinToString(" ") { "+$it" }
+                    return titleRepository.search(searchString)
+                } else {
+                    return titleRepository.findAll()
+                    //titleRepository.search(keyword, tempo, mood, genre, instrument)
+
+                }
+            }
         }
     }
 
