@@ -111,10 +111,17 @@ class MusicService(
                     && genre.isNullOrEmpty()
                     && instrument.isNullOrEmpty()
                 ) {
-                    val keywordSeperated = keyword.split(" ").toTypedArray()
-                    val searchString = keywordSeperated.joinToString(" ") { "+$it" }
-                    print("THIS IS THE SEARCH STRING " + searchString + " THIS WAS THE STRING")
-                    return titleRepository.search(searchString)
+                    val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
+                    val keywordTrimmed = keywordReplaced.trimEnd()
+                    val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
+                    val searchStringAND = keywordSeperated.joinToString(" ") { "+$it" }
+                    val searchStringANDResult = titleRepository.search(searchStringAND)
+                    if (searchStringANDResult.isNullOrEmpty()) {
+                        val searchStringOR = keywordSeperated.joinToString(" ")
+                        return titleRepository.search(searchStringOR)
+                    } else {
+                        return searchStringANDResult
+                    }
                 } else {
                     return titleRepository.findAll()
                     //titleRepository.search(keyword, tempo, mood, genre, instrument)
