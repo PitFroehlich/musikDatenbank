@@ -43,15 +43,15 @@
     </insert>
     <insert tableName="mood_title_link">
         <column name="title_id" value="8"/>
-        <column name="mood_id" value="4"/>
+        <column name="mood_id" value="1"/>
     </insert>
     <insert tableName="mood_title_link">
         <column name="title_id" value="9"/>
-        <column name="mood_id" value="4"/>
+        <column name="mood_id" value="1"/>
     </insert>
     <insert tableName="mood_title_link">
         <column name="title_id" value="10"/>
-        <column name="mood_id" value="4"/>
+        <column name="mood_id" value="1"/>
     </insert>
     </changeSet>
 </databaseChangeLog>
