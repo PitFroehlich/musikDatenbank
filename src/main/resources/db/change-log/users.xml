@@ -16,5 +16,67 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230729_insert_dummy_users" author="pit">
+        <insert tableName="users">
+            <column name="username" value="User1"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User2"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User3"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User4"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User5"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User6"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User7"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User8"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User9"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="User10"/>
+            <column name="email" value="user1@gmail.de"/>
+            <column name="password" value="123"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+    </changeSet>
 
 </databaseChangeLog>
