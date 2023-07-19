@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AudioController(
     val musicService: MusicService,
-    val converter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
 ) : AudioApi, AudioFileApi {
+    val converter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
 
     override fun getAudios(): ResponseEntity<List<AudioView>> {
         val audios = musicService.getAllAudios().map { converter.convertToView(it) }.toList()
