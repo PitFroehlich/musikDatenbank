@@ -84,10 +84,10 @@ class MusicService(
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 
     fun searchTitle(keyword: String?): Iterable<Title> {
-        return if (keyword != null) {
-            titleRepository.search(keyword)
+        return if (keyword.isNullOrEmpty()) {
+            titleRepository.showMostPopular()
         } else {
-            titleRepository.findAll()
+            titleRepository.search(keyword)
         }
     }
 
