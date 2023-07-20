@@ -94,18 +94,18 @@ class MusicService(
         genre: List<Int>?,
         instrument: List<Int>?
     ): Iterable<Title> {
-         if (
+        if (
             keyword.isNullOrEmpty()
             && mood.toString().isNullOrEmpty()
             && genre.toString().isNullOrEmpty()
             && instrument.toString().isNullOrEmpty()
         ) {
-             return titleRepository.showMostPopular()
+            return titleRepository.showMostPopular()
         } else {
-             if (keyword.isNullOrEmpty()) {
+            if (keyword.isNullOrEmpty()) {
                 //titleRepository.search(tempo, mood, genre, instrument)
 
-                 return titleRepository.findAll()
+                return titleRepository.findAll()
             } else {
                 if (mood.isNullOrEmpty()
                     && genre.isNullOrEmpty()

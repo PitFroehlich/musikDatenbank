@@ -21,4 +21,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230720" author="pit">
+        <sql>
+            ALTER TABLE `musicdb`.`private_playlist`
+                ADD FULLTEXT INDEX `full_text_index` (`name`) VISIBLE;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

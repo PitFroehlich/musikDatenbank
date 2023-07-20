@@ -41,4 +41,11 @@
             <column name="RELEASE_YEAR" value="1995-01-03"/>
         </insert>
     </changeSet>
+
+    <changeSet id="20230720" author="pit">
+        <sql>
+            ALTER TABLE `musicdb`.`album`
+                ADD FULLTEXT INDEX `full_text_index` (`name`) VISIBLE;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
