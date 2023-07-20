@@ -18,6 +18,7 @@ import com.htwk.musikdatenbank.entities.mood.MoodRepository
 import com.htwk.musikdatenbank.entities.owner.Owner
 import com.htwk.musikdatenbank.entities.owner.OwnerRepository
 import com.htwk.musikdatenbank.entities.presskit.Presskit
+import com.htwk.musikdatenbank.entities.presskit.PresskitConverter
 import com.htwk.musikdatenbank.entities.presskit.PresskitRepository
 import com.htwk.musikdatenbank.entities.privateplaylist.PrivatePlaylist
 import com.htwk.musikdatenbank.entities.privateplaylist.PrivatePlaylistRepository
@@ -28,8 +29,12 @@ import com.htwk.musikdatenbank.entities.title.TitleRepository
 import com.htwk.musikdatenbank.entities.user.Users
 import com.htwk.musikdatenbank.entities.user.UsersRepository
 import org.mapstruct.factory.Mappers
+import org.openapitools.model.PresskitView
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
+import java.io.ByteArrayInputStream
+import java.io.InputStream
+import java.net.URLConnection
 
 @Service
 class MusicService(
@@ -49,6 +54,7 @@ class MusicService(
 
     ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
+    val pressKitConverter: PresskitConverter = Mappers.getMapper(PresskitConverter::class.java)
 
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
@@ -62,6 +68,7 @@ class MusicService(
     /*------------------------------------Genre-----------------------------------------------*/
 
     fun getAllGenres(): MutableIterable<Genre> = genreRepository.findAll()
+
     /*------------------------------------Owner-----------------------------------------------*/
     fun getAllOwners(): MutableIterable<Owner> = ownerRepository.findAll()
 
@@ -90,6 +97,38 @@ class MusicService(
 
     /*------------------------------------Presskit--------------------------------------------*/
     fun getAllPresskits(): MutableIterable<Presskit> = presskitRepository.findAll()
+
+    private fun checkContentType(bytes: ByteArray, expectedContentType: String): Boolean {
+        print(bytes.size)
+        val inputStream: InputStream = ByteArrayInputStream(bytes)
+        val mimeType: String = URLConnection.guessContentTypeFromStream(inputStream)
+        return mimeType == expectedContentType
+    }
+
+    fun postPresskit(image: ByteArray?, pdf: ByteArray?): PresskitView {
+
+//        if (image != null && pdf != null) {
+//            if (Files.probeContentType(Path.of(image.toString())) == "image/jpeg"
+//                && Files.probeContentType(Path.of(pdf.toString())) == "application/pdf"
+//            ) {
+        if (image == null || pdf == null) {
+            throw Exception("Input is null")
+       }
+/*        if (!checkContentType(image, "image/jpeg")) {
+            throw Exception("Wrong Image Format")
+        }*/
+        /*if (!checkContentType(pdf, "image/jpeg")) {
+            throw Exception("PDF RIP")
+        }*/
+        //
+        val presskit =
+            presskitRepository.save(pressKitConverter.toEntity(image, pdf))
+        return pressKitConverter.toView(presskit)
+//            } else throw Exception("Wrong File Format")
+
+
+//        } else throw Exception("Files not complete")
+    }
 
     /*----------------------------------Public Playlist---------------------------------------*/
     fun getAllPublicPlaylists(): MutableIterable<PublicPlaylist> = publicPlaylistRepository.findAll()
@@ -203,17 +242,19 @@ class MusicService(
             }
         }
     }
+
     fun searchStringAndCreator(keyword: String): String {
         val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
         val keywordTrimmed = keywordReplaced.trimEnd()
         val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
-        return  keywordSeperated.joinToString(" ") { "+$it" }
+        return keywordSeperated.joinToString(" ") { "+$it" }
     }
+
     fun searchStringOrCreator(keyword: String): String {
         val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
         val keywordTrimmed = keywordReplaced.trimEnd()
         val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
-        return  keywordSeperated.joinToString(" ")
+        return keywordSeperated.joinToString(" ")
     }
 
     /*--------------------------------------------User----------------------------------------*/
