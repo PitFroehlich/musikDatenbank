@@ -90,8 +90,12 @@ class MusicService(
 
     fun getAllPublicPlaylistsByLabel(labelId: Long): MutableIterable<PublicPlaylist> {
         val label = this.labelRepository.findById(labelId)
+        if (labelRepository.findById(labelId).isPresent) {
+            return publicPlaylistRepository.findAllByLabel(label.get())
+        } else {
+            throw Exception("There is no Label with this ID")
+        }
 
-        return publicPlaylistRepository.findAllByLabel(label.get())
     }
 
     /*--------------------------------------------Audio---------------------------------------*/
@@ -125,7 +129,7 @@ class MusicService(
         instrument: Int?
     ): Iterable<Title> {
         if (
-            keyword == null
+            keyword.isNullOrEmpty()
             && mood == null
             && genre == null
             && instrument == null

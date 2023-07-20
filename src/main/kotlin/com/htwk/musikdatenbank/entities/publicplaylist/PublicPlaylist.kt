@@ -11,6 +11,7 @@ class PublicPlaylist (
     val id: Long,
     var name: String,
     var text: String,
+    @Column(name = "preview_picture")
     var previewPicture: ByteArray,
     var visible: Boolean,
     @ManyToOne
