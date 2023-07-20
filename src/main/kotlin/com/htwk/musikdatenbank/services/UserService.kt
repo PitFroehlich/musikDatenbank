@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.lang.IllegalStateException
 import java.util.*
+import kotlin.jvm.optionals.getOrNull
 
 
 @Service
@@ -24,12 +25,14 @@ class UserService(
     /*------------------------------------Label------------------------------------------------*/
     fun getAllLabels(): MutableIterable<Label> = labelRepository.findAll()
 
-    fun createLabel(label: Label) {
+    fun getLabel(id: Int) = labelRepository.findById(id.toLong()).get()
+
+    fun createLabel(label: Label): Label {
         val labelExists = labelRepository.existsById(label.id)
         if (labelExists) {
             throw IllegalStateException("Label mit Id ${label.id} existiert bereits")
         }
-        labelRepository.save(label)
+        return labelRepository.save(label)
     }
 
     /*------------------------------------User------------------------------------------------*/
@@ -78,12 +81,24 @@ class UserService(
         if (user.isEmpty) {
             throw IllegalStateException("User with name ${user.get().username} does not exist")
         }
+
+        val role = UserView.Role.valueOf(authorities.firstOrNull()!!.authority.removePrefix("ROLE_")
+                .replaceFirstChar { it.lowercase(Locale.getDefault()) })
+
+        var labelId: Long? = null
+
+        if(role == UserView.Role.lABEL){
+            val label = labelRepository.findByName(username)
+            labelId = label.getOrNull()?.id
+        }
+
         return UserView(
                 username = username,
                 password = user.get().password,
                 email = user.get().email,
                 role = UserView.Role.valueOf(authorities.firstOrNull()!!.authority.removePrefix("ROLE_")
-                        .replaceFirstChar { it.lowercase(Locale.getDefault()) })
+                        .replaceFirstChar { it.lowercase(Locale.getDefault()) }),
+                labelId = labelId?.toInt()
         )
     }
 

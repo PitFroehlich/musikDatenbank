@@ -73,8 +73,15 @@ paths:
                   $ref: '#/components/schemas/OwnerView'
   /label:
     get:
-      summary: Returns all labels
-      operationId: getLabels
+      summary: Returns label
+      operationId: getLabel
+      parameters:
+        - name: labelId
+          in: query
+          description: The ID of the label
+          required: true
+          schema:
+            type: integer
       tags:
         - label-controller
       responses:
@@ -83,8 +90,6 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
                   $ref: '#/components/schemas/LabelView'
     post:
       summary: Creates a new label
@@ -99,6 +104,10 @@ paths:
       responses:
         201:
           description: 'Label created.'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/LabelView'
   /audio:
     get:
       summary: Returns all audio files
@@ -792,6 +801,8 @@ components:
         role:
           type: string
           enum: [ 'LABEL', 'USER' ]
+        labelId:
+          type: integer
     DownloadView:
       type: object
       properties:

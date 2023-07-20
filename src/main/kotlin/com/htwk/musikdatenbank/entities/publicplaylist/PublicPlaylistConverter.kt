@@ -13,5 +13,6 @@ interface PublicPlaylistConverter {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "view.name")
+    @Mapping(target = "label", source = "label")
     fun convertToEntity(view: PublicPlaylistView, label: Label): PublicPlaylist
 }
