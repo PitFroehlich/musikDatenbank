@@ -9,6 +9,7 @@ import com.htwk.musikdatenbank.entities.audio.AudioConverter
 import com.htwk.musikdatenbank.entities.audio.AudioRepository
 import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
+import com.htwk.musikdatenbank.entities.label.Label
 import com.htwk.musikdatenbank.entities.label.LabelRepository
 import com.htwk.musikdatenbank.entities.mood.Mood
 import com.htwk.musikdatenbank.entities.mood.MoodRepository
@@ -30,20 +31,20 @@ import org.springframework.stereotype.Service
 
 @Service
 class MusicService(
-    val moodRepository: MoodRepository,
-    val ownerRepository: OwnerRepository,
-    val instrumentRepository: InstrumentRepository,
-    val publicPlaylistRepository: PublicPlaylistRepository,
-    val audioRepository: AudioRepository,
-    private val titleRepository: TitleRepository,
-    private val artistRepository: ArtistRepository,
-    private val albumRepository: AlbumRepository,
-    private val presskitRepository: PresskitRepository,
-    private val privatePlaylistRepository: PrivatePlaylistRepository,
-    private val usersRepository: UsersRepository,
-    private val labelRepository: LabelRepository,
+        val moodRepository: MoodRepository,
+        val ownerRepository: OwnerRepository,
+        val instrumentRepository: InstrumentRepository,
+        val publicPlaylistRepository: PublicPlaylistRepository,
+        val audioRepository: AudioRepository,
+        private val titleRepository: TitleRepository,
+        private val artistRepository: ArtistRepository,
+        private val albumRepository: AlbumRepository,
+        private val presskitRepository: PresskitRepository,
+        private val privatePlaylistRepository: PrivatePlaylistRepository,
+        private val usersRepository: UsersRepository,
+        private val labelRepository: LabelRepository,
 
-    ) {
+        ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
 
     /*--------------------------------------------Album---------------------------------------*/
@@ -68,6 +69,17 @@ class MusicService(
         val user = this.usersRepository.findByUsername(username)
 
         return this.privatePlaylistRepository.findAllByUsers(user.get())
+    }
+
+    fun getUserFromPlaylist(playlistId: Long): Users {
+        val playlist = this.privatePlaylistRepository.findById(playlistId)
+        return playlist.get().users
+    }
+
+    fun createPrivatePlaylist(playlist: PrivatePlaylist, titles: List<Long>) {
+        this.privatePlaylistRepository.save(playlist)
+
+        titles.forEach { this.privatePlaylistRepository.createPlaylist(playlist.id, it) }
     }
 
     /*------------------------------------Presskit--------------------------------------------*/
@@ -99,18 +111,24 @@ class MusicService(
     /*--------------------------------------------Title---------------------------------------*/
     fun getAllTitles(): MutableIterable<Title> = titleRepository.findAll()
 
+    fun getLabelFromTitle(titleId: Long): Label {
+        val title = this.titleRepository.findById(titleId)
+
+        return title.get().label
+    }
+
     fun searchTitle(
-        keyword: String?,
-        tempo: Int?,
-        mood: List<Int>?,
-        genre: List<Int>?,
-        instrument: List<Int>?
+            keyword: String?,
+            tempo: Int?,
+            mood: List<Int>?,
+            genre: List<Int>?,
+            instrument: List<Int>?
     ): Iterable<Title> {
         if (
-            keyword.isNullOrEmpty()
-            && mood.toString().isNullOrEmpty()
-            && genre.toString().isNullOrEmpty()
-            && instrument.toString().isNullOrEmpty()
+                keyword.isNullOrEmpty()
+                && mood.toString().isNullOrEmpty()
+                && genre.toString().isNullOrEmpty()
+                && instrument.toString().isNullOrEmpty()
         ) {
             return titleRepository.showMostPopular()
         } else {
@@ -120,8 +138,8 @@ class MusicService(
                 return titleRepository.findAll()
             } else {
                 if (mood.isNullOrEmpty()
-                    && genre.isNullOrEmpty()
-                    && instrument.isNullOrEmpty()
+                        && genre.isNullOrEmpty()
+                        && instrument.isNullOrEmpty()
                 ) {
                     val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
                     val keywordTrimmed = keywordReplaced.trimEnd()

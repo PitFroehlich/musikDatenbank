@@ -411,6 +411,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PrivatePlaylistView'
+    post:
+      summary: Creates private playlist
+      operationId: createPrivatePlaylist
+      tags:
+        - private-playlist-controller
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PrivatePlaylistCreateDTO'
+      responses:
+        201:
+          description: 'Private Playlist created.'
   /user:
     get:
       summary: Returns all users
@@ -706,7 +719,15 @@ components:
           type: integer
         audioId:
           type: integer
-
+    PrivatePlaylistCreateDTO:
+      type: object
+      properties:
+        playlist:
+          $ref: '#/components/schemas/PrivatePlaylistView'
+        titles:
+          type: array
+          items:
+            type: integer
 
 
 
