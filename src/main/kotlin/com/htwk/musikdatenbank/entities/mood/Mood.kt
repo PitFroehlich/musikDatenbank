@@ -12,6 +12,6 @@ data class Mood(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    val id: Long,
+    val id: Long?,
     var name: String
 )

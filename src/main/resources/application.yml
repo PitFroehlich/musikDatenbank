@@ -32,5 +32,5 @@ spring:
 #    root: trace
   servlet:
     multipart:
-      max-request-size: 50MB
-      max-file-size: 50MB
+      max-request-size: 60MB
+      max-file-size: 60MB

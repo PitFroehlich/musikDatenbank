@@ -140,6 +140,20 @@ paths:
             "application/json":
               schema:
                 $ref: '#/components/schemas/AudioView'
+  /title-upload:
+    post:
+      summary: Create a new title
+      operationId: uploadTitle
+      tags:
+        - title-controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TitleUploadDto'
+      responses:
+        "201":
+          description: Successfully created new Song.
   /audio-file/{audioId}:
     get:
       summary: Returns specific audio file
@@ -481,6 +495,58 @@ components:
       type: http
       scheme: basic
   schemas:
+    TitleUploadDto:
+      type: object
+      required:
+        - label_id
+        - name
+        - gemaNr
+        - visible
+        - releaseDate
+        - moods
+        - instruments
+        - genres
+        - cover
+        - bpm
+        - genres
+        - artists
+        - wav
+      properties:
+        label_id:
+          type: integer
+        name:
+          type: string
+        gemaNr:
+          type: string
+        bpm:
+          type: integer
+        releaseDate:
+          type: string
+          format: date
+        visible:
+          type: boolean
+        wav:
+          type: string
+          format: byte
+        cover:
+          type: string
+          format: byte
+        moods:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        artists:
+          type: array
+          items:
+            type: string
+        instruments:
+          type: array
+          items:
+            type: string
     AuthenticationView:
       type: object
       properties:
