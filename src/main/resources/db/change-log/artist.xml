@@ -24,4 +24,16 @@
                 ADD FULLTEXT INDEX `full_text_index` (`name`) VISIBLE;
         </sql>
     </changeSet>
+    <changeSet id="20230719_adding_artists" author="cati">
+        <insert tableName="artist">
+            <column name="name" value="RockMusiker"/>
+            <column name="image" value="12345"/>
+            <column name="biography" value="Krasser Typ"/>
+        </insert>
+        <insert tableName="artist">
+            <column name="name" value="Von wegen Lisbeth"/>
+            <column name="image" value="12345"/>
+            <column name="biography" value="Deutsche Band"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

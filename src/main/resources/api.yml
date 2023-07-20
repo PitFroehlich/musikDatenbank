@@ -41,6 +41,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MoodView'
+  /genre:
+    get:
+      summary: Returns all genres
+      operationId: getGenres
+      tags:
+        - genre-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenreView'
   /owner:
     get:
       summary: Returns all owners of song titles
@@ -312,21 +327,6 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/GenreTitleLinkView'
-  /genre:
-    get:
-      summary: Returns the genres of a specific title
-      operationId: getGenres
-      tags:
-        - genre-controller
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GenreTitleLinkView'
   /album-title-link:
     get:
       summary: Returns the titles of a specific album
@@ -529,6 +529,13 @@ components:
         visible:
           type: boolean
     InstrumentView:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    GenreView:
       type: object
       properties:
         id:

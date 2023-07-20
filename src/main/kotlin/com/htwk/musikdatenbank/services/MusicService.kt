@@ -7,6 +7,8 @@ import com.htwk.musikdatenbank.entities.artist.ArtistRepository
 import com.htwk.musikdatenbank.entities.audio.Audio
 import com.htwk.musikdatenbank.entities.audio.AudioConverter
 import com.htwk.musikdatenbank.entities.audio.AudioRepository
+import com.htwk.musikdatenbank.entities.genre.Genre
+import com.htwk.musikdatenbank.entities.genre.GenreRepository
 import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
 import com.htwk.musikdatenbank.entities.label.Label
@@ -36,6 +38,7 @@ class MusicService(
     val instrumentRepository: InstrumentRepository,
     val publicPlaylistRepository: PublicPlaylistRepository,
     val audioRepository: AudioRepository,
+    private val genreRepository: GenreRepository,
     private val titleRepository: TitleRepository,
     private val artistRepository: ArtistRepository,
     private val albumRepository: AlbumRepository,
@@ -56,6 +59,9 @@ class MusicService(
     /*------------------------------------Mood------------------------------------------------*/
     fun getAllMoods(): MutableIterable<Mood> = moodRepository.findAll()
 
+    /*------------------------------------Genre-----------------------------------------------*/
+
+    fun getAllGenres(): MutableIterable<Genre> = genreRepository.findAll()
     /*------------------------------------Owner-----------------------------------------------*/
     fun getAllOwners(): MutableIterable<Owner> = ownerRepository.findAll()
 
