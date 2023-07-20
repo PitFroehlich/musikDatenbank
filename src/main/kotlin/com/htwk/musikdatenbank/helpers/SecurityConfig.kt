@@ -80,7 +80,7 @@ class SecurityConfig() {
                 it.disable()
             }
             .authorizeHttpRequests { request ->
-                request.requestMatchers("/user", "/login").permitAll().anyRequest().authenticated()
+                request.requestMatchers("/user", "/login", "/label").permitAll().anyRequest().authenticated()
             }
             .httpBasic(Customizer.withDefaults())
 

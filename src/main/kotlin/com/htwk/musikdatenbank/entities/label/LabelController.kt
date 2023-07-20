@@ -9,24 +9,25 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class LabelController(
-    val userService: UserService,
+        val userService: UserService,
 ) : LabelApi {
     val converter: LabelConverter = Mappers.getMapper(
-        LabelConverter::class.java
+            LabelConverter::class.java
     )
 
-    override fun getLabels(): ResponseEntity<List<LabelView>> {
-        val labels = userService.getAllLabels().map { converter.convertToView(it) }.toList()
+    override fun getLabel(labelId: Int): ResponseEntity<LabelView> {
+        val label = converter.convertToView(userService.getLabel(labelId))
+        println(arrayListOf(label))
+        return ResponseEntity.ok(label)
 
-        return ResponseEntity.ok(labels)
     }
 
-    override fun createLabel(labelView: LabelView?): ResponseEntity<Unit> {
-        if(labelView == null) {
+    override fun createLabel(labelView: LabelView?): ResponseEntity<LabelView> {
+        if (labelView == null) {
             return ResponseEntity.badRequest().build()
         }
 
-        labelView.let { converter.convertToEntity(it) }.let { userService.createLabel(it) }
-        return ResponseEntity.status(201).build()
+        val label = labelView.let { converter.convertToEntity(it) }.let { userService.createLabel(it) }
+        return ResponseEntity.ok(converter.convertToView(label))
     }
 }

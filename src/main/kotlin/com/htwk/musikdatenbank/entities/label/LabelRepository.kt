@@ -2,6 +2,9 @@ package com.htwk.musikdatenbank.entities.label
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
+import java.util.Optional
 
 @Repository
-interface LabelRepository: CrudRepository<Label, Long>
+interface LabelRepository: CrudRepository<Label, Long> {
+    fun findByName(name: String): Optional<Label>
+}
