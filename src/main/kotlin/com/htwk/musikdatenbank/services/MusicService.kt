@@ -31,20 +31,20 @@ import org.springframework.stereotype.Service
 
 @Service
 class MusicService(
-        val moodRepository: MoodRepository,
-        val ownerRepository: OwnerRepository,
-        val instrumentRepository: InstrumentRepository,
-        val publicPlaylistRepository: PublicPlaylistRepository,
-        val audioRepository: AudioRepository,
-        private val titleRepository: TitleRepository,
-        private val artistRepository: ArtistRepository,
-        private val albumRepository: AlbumRepository,
-        private val presskitRepository: PresskitRepository,
-        private val privatePlaylistRepository: PrivatePlaylistRepository,
-        private val usersRepository: UsersRepository,
-        private val labelRepository: LabelRepository,
+    val moodRepository: MoodRepository,
+    val ownerRepository: OwnerRepository,
+    val instrumentRepository: InstrumentRepository,
+    val publicPlaylistRepository: PublicPlaylistRepository,
+    val audioRepository: AudioRepository,
+    private val titleRepository: TitleRepository,
+    private val artistRepository: ArtistRepository,
+    private val albumRepository: AlbumRepository,
+    private val presskitRepository: PresskitRepository,
+    private val privatePlaylistRepository: PrivatePlaylistRepository,
+    private val usersRepository: UsersRepository,
+    private val labelRepository: LabelRepository,
 
-        ) {
+    ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
 
     /*--------------------------------------------Album---------------------------------------*/
@@ -130,11 +130,9 @@ class MusicService(
             && genre == null
             && instrument == null
         ) {
-            print(">>>> We are in the most popular $keyword $mood $genre $instrument")
             return titleRepository.showMostPopular()
         } else {
             if (keyword.isNullOrEmpty()) {
-                print(">>>>>> We are in the Tagsearch $tempo $mood $genre $instrument")
                 val moodLong = mood?.toLong()
                 val genreLong = genre?.toLong()
                 val instrumentLong = instrument?.toLong()
@@ -149,29 +147,57 @@ class MusicService(
                     && genre == null
                     && instrument == null
                 ) {
-                    print(">>>>>> We are in the Fulltext Search")
-
-                    val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
-                    val keywordTrimmed = keywordReplaced.trimEnd()
-                    val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
-                    val searchStringAND = keywordSeperated.joinToString(" ") { "+$it" }
+                    val searchStringAND = searchStringAndCreator(keyword)
                     val searchStringANDResult = titleRepository.search(searchStringAND)
                     if (searchStringANDResult.isNullOrEmpty()) {
-                        val searchStringOR = keywordSeperated.joinToString(" ")
+                        val searchStringOR = searchStringOrCreator(keyword)
                         return titleRepository.search(searchStringOR)
                     } else {
                         return searchStringANDResult
                     }
                 } else {
-                    print(">>>>>> We are in the Fallback Search")
+                    val searchStringAND = searchStringAndCreator(keyword)
+                    val searchStringANDResult = titleRepository.search(searchStringAND)
 
-                    return titleRepository.findAll()
+                    val moodLong = mood?.toLong()
+                    val genreLong = genre?.toLong()
+                    val instrumentLong = instrument?.toLong()
+                    val resultAND = titleRepository.tagSearchAND(tempo, moodLong, genreLong, instrumentLong)
 
-                    //titleRepository.search(keyword, tempo, mood, genre, instrument)
-
+                    val resultKeywordANDTag = searchStringANDResult.intersect(resultAND)
+                    if (resultKeywordANDTag.isNullOrEmpty()) {
+                        val searchStringOR = searchStringOrCreator(keyword)
+                        val searchStringORResult = titleRepository.search(searchStringOR)
+                        val resultORKeywordANDTag = searchStringORResult.intersect(resultAND)
+                        if (resultORKeywordANDTag.isNullOrEmpty()) {
+                            val resultTagOr = titleRepository.tagSearchOR(tempo, moodLong, genreLong, instrumentLong)
+                            val resultOrKeywordANDORTag = resultORKeywordANDTag.intersect(resultTagOr)
+                            if (resultOrKeywordANDORTag.isNullOrEmpty()) {
+                                return resultORKeywordANDTag + resultTagOr
+                            } else {
+                                return resultOrKeywordANDORTag
+                            }
+                        } else {
+                            return resultORKeywordANDTag
+                        }
+                    } else {
+                        return resultKeywordANDTag
+                    }
                 }
             }
         }
+    }
+    fun searchStringAndCreator(keyword: String): String {
+        val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
+        val keywordTrimmed = keywordReplaced.trimEnd()
+        val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
+        return  keywordSeperated.joinToString(" ") { "+$it" }
+    }
+    fun searchStringOrCreator(keyword: String): String {
+        val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
+        val keywordTrimmed = keywordReplaced.trimEnd()
+        val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
+        return  keywordSeperated.joinToString(" ")
     }
 
     /*--------------------------------------------User----------------------------------------*/
