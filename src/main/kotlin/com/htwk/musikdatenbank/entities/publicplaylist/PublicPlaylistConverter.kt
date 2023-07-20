@@ -1,17 +1,17 @@
 package com.htwk.musikdatenbank.entities.publicplaylist
 
-import com.htwk.musikdatenbank.helpers.Converter
-import org.springframework.core.io.Resource
+import com.htwk.musikdatenbank.entities.label.Label
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
-import org.mapstruct.Named
 import org.openapitools.model.PublicPlaylistView
-import org.springframework.core.io.ByteArrayResource
 
 // NOTE: There is an issue with Kotlin and interfaces and the @Named annotation, that's why we use abstract classes here
 @Mapper
-abstract class PublicPlaylistConverter : Converter<PublicPlaylistView, PublicPlaylist> {
-    abstract override fun convertToView(entity: PublicPlaylist): PublicPlaylistView
+interface PublicPlaylistConverter {
+    @Mapping(target = "label", source = "label")
+    fun convertToView(entity: PublicPlaylist): PublicPlaylistView
 
-    abstract override fun convertToEntity(view: PublicPlaylistView): PublicPlaylist
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "view.name")
+    fun convertToEntity(view: PublicPlaylistView, label: Label): PublicPlaylist
 }
