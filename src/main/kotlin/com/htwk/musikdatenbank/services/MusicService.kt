@@ -64,11 +64,23 @@ class MusicService(
     /*------------------------------------Private Playlist------------------------------------*/
     fun getAllPrivatePlaylists(): MutableIterable<PrivatePlaylist> = privatePlaylistRepository.findAll()
 
+    fun getAllPrivatePlaylistsByUser(username: String): MutableIterable<PrivatePlaylist> {
+        val user = this.usersRepository.findByUsername(username)
+
+        return this.privatePlaylistRepository.findAllByUsers(user.get())
+    }
+
     /*------------------------------------Presskit--------------------------------------------*/
     fun getAllPresskits(): MutableIterable<Presskit> = presskitRepository.findAll()
 
     /*----------------------------------Public Playlist---------------------------------------*/
     fun getAllPublicPlaylists(): MutableIterable<PublicPlaylist> = publicPlaylistRepository.findAll()
+
+    fun getAllPublicPlaylistsByLabel(labelId: Long): MutableIterable<PublicPlaylist> {
+        val label = this.labelRepository.findById(labelId)
+
+        return publicPlaylistRepository.findAllByLabel(label.get())
+    }
 
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
@@ -133,5 +145,6 @@ class MusicService(
 
     /*--------------------------------------------User----------------------------------------*/
     fun getAllUsers(): MutableIterable<Users> = usersRepository.findAll()
+
 
 }

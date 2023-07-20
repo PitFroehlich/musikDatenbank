@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class PublicPlaylistController(
     val musicService: MusicService,
-    val converter: PublicPlaylistConverter = Mappers.getMapper(
-        PublicPlaylistConverter::class.java
-    )
 ) : PublicPlaylistApi {
+    val converter: PublicPlaylistConverter = Mappers.getMapper(
+            PublicPlaylistConverter::class.java
+    )
+    override fun getPublicPlaylists(labelId: Int?): ResponseEntity<List<PublicPlaylistView>> {
+        if(labelId != null){
+            val publicPlaylists = musicService.getAllPublicPlaylistsByLabel(labelId.toLong()).map { converter.convertToView(it) }.toList()
 
-    @GetMapping("/publicPlaylist")
-    override fun getPublicPlaylists(): ResponseEntity<List<PublicPlaylistView>> {
+            return ResponseEntity.ok(publicPlaylists)
+        }
+
         val publicPlaylists = musicService.getAllPublicPlaylists().map { converter.convertToView(it) }.toList()
 
         return ResponseEntity.ok(publicPlaylists)

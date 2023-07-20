@@ -142,7 +142,7 @@ paths:
         200:
           description: OK
           content:
-            'multipart/form-data':
+            'audio/wav':
               schema:
                 type: string
                 format: byte
@@ -164,6 +164,13 @@ paths:
   /public-playlist:
     get:
       summary: Returns all public playlists
+      parameters:
+        - name: labelId
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: label id to find specific playlist for label
       operationId: getPublicPlaylists
       tags:
         - public-playlist-controller
@@ -385,6 +392,13 @@ paths:
   /private-playlist:
     get:
       summary: Returns all private playlists
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+          description: username to find specific playlist for label
       operationId: getPrivatePlaylists
       tags:
         - private-playlist-controller

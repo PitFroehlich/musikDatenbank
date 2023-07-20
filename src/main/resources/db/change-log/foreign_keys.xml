@@ -113,4 +113,9 @@
                                  constraintName="fk_authorities_users" referencedTableName="users"
                                  referencedColumnNames="username"/>
     </changeSet>
+    <changeSet id="20230720_create_foreign_key_public_playlist_label" author="cati">
+        <addForeignKeyConstraint baseTableName="public_playlist" baseColumnNames="label_id"
+                                 constraintName="public_playlist_label" referencedTableName="label"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>

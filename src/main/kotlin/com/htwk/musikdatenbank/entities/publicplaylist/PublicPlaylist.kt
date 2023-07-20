@@ -1,8 +1,7 @@
 package com.htwk.musikdatenbank.entities.publicplaylist
 
+import com.htwk.musikdatenbank.entities.label.Label
 import jakarta.persistence.*
-import org.springframework.core.io.Resource
-import java.sql.Blob
 
 @Entity
 class PublicPlaylist (
@@ -13,5 +12,8 @@ class PublicPlaylist (
     var name: String,
     var text: String,
     var previewPicture: ByteArray,
-    var visible: Boolean
+    var visible: Boolean,
+    @ManyToOne
+    @JoinColumn(name = "label_id")
+    var label: Label,
 )

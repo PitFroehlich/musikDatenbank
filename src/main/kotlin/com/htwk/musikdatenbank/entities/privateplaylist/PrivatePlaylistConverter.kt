@@ -11,7 +11,6 @@ interface PrivatePlaylistConverter {
     fun convertToView(entity: PrivatePlaylist): PrivatePlaylistView
 
     @Mapping(target = "users", source = "users")
-//    @Mapping(target = "username", ignore = true)
     @Mapping(target = "name", ignore = true)
     fun convertToEntity(view: PrivatePlaylistView, users: Users): PrivatePlaylist
 }

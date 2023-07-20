@@ -38,7 +38,6 @@ class AudioController(
         fileName: String
     ): ResponseEntity<ByteArray> =
         ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"$fileName\"")
             .body(report)
 }

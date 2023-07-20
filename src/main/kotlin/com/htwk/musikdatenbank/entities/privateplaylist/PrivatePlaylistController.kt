@@ -15,7 +15,12 @@ class PrivatePlaylistController(
     val converter: PrivatePlaylistConverter = Mappers.getMapper(PrivatePlaylistConverter::class.java)
 
     @PreAuthorize("hasRole('USER')")
-    override fun getPrivatePlaylists(): ResponseEntity<List<PrivatePlaylistView>> {
+    override fun getPrivatePlaylists(username: String?): ResponseEntity<List<PrivatePlaylistView>> {
+        if(username != null){
+            val privatePlaylists = musicService.getAllPrivatePlaylistsByUser(username).map { converter.convertToView(it) }.toList()
+            return ResponseEntity.ok(privatePlaylists)
+        }
+
         val privatePlaylists = musicService.getAllPrivatePlaylists().map { converter.convertToView(it) }.toList()
         return ResponseEntity.ok(privatePlaylists)
     }
