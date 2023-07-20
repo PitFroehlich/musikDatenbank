@@ -1,6 +1,7 @@
 package com.htwk.musikdatenbank.services
 
 import com.htwk.musikdatenbank.entities.album.Album
+import com.htwk.musikdatenbank.entities.album.AlbumConverter
 import com.htwk.musikdatenbank.entities.album.AlbumRepository
 import com.htwk.musikdatenbank.entities.artist.Artist
 import com.htwk.musikdatenbank.entities.artist.ArtistRepository
@@ -37,15 +38,15 @@ import com.htwk.musikdatenbank.entities.title.TitleRepository
 import com.htwk.musikdatenbank.entities.user.Users
 import com.htwk.musikdatenbank.entities.user.UsersRepository
 import org.mapstruct.factory.Mappers
-import org.openapitools.model.TitleUploadDto
 import org.openapitools.model.PresskitView
+import org.openapitools.model.TitleUploadDto
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
-import java.sql.Date
-import java.time.LocalDate
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.net.URLConnection
+import java.sql.Date
+import java.time.LocalDate
 
 @Service
 class MusicService(
@@ -70,9 +71,18 @@ class MusicService(
         ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
     val pressKitConverter: PresskitConverter = Mappers.getMapper(PresskitConverter::class.java)
+    val albumConverter: AlbumConverter = Mappers.getMapper(AlbumConverter::class.java)
 
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
+
+    fun postAlbum(year: LocalDate,
+                  image: Resource,
+                  text: String,
+                  labelId: Int,
+                  presskitId: Int?): Album{
+      return albumRepository.save(albumConverter.toEntity(year, image, text, labelId, presskitId))
+    }
 
     /*--------------------------------------------Artist---------------------------------------*/
     fun getAllArtists(): MutableIterable<Artist> = artistRepository.findAll()

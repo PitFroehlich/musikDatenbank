@@ -367,6 +367,27 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/AlbumTitleLinkView'
+  /album/{albumId}:
+    get:
+      summary: Returns specific album
+      operationId: getAlbum
+      parameters:
+        - name: albumId
+          in: path
+          required: true
+          schema:
+            type: integer
+      tags:
+        - album-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlbumView'
   /album:
     get:
       summary: Returns all albums
@@ -382,6 +403,45 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AlbumView'
+    post:
+      summary: Uploads an album to the db
+      tags:
+        - album-controller
+      operationId: postAlbum
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                year:
+                  type: string
+                  format: date
+                  example: "2021-01-30"
+                image:
+                  type: string
+                  format: binary
+                text:
+                  type: string
+                labelId:
+                  type: integer
+                presskitId:
+                  type: integer
+              required:
+                - name
+                - year
+                - image
+                - text
+                - labelId
+      responses:
+        "200":
+          description: Represents audio from db
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/AlbumView'
   /presskit:
     get:
       summary: Returns all presskits
@@ -735,6 +795,10 @@ components:
         releaseDate:
           type: string
           format: date
+        labelId:
+          type: integer
+        presskitId:
+          type: integer
     PresskitView:
       type: object
       properties:

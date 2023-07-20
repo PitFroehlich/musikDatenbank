@@ -19,6 +19,14 @@
             <column name="release_year" type="date">
                 <constraints nullable="false"/>
             </column>
+            <column name="label_id"
+              type="bigInt">
+            <constraints nullable="false"/>
+            </column>
+            <column name="presskit_id"
+              type="bigInt">
+            <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="20230719_adding_Albums" author="pit">
@@ -26,19 +34,22 @@
             <column name="name" value="First Album"/>
             <column name="text" value="The first album of one of the best bands in the world."/>
             <column name="cover" value="Awesome Cover"/>
-            <column name="RELEASE_YEAR" value="1995-01-01"/>
+            <column name="release_year" value="1995-01-01"/>
+            <column name="label_id" value="1"/>
         </insert>
         <insert tableName="album">
             <column name="name" value="Second Album"/>
             <column name="text" value="The second album of one of the best bands in the world."/>
             <column name="cover" value="Awesome Cover"/>
-            <column name="RELEASE_YEAR" value="1995-01-02"/>
+            <column name="release_year" value="1995-01-02"/>
+            <column name="label_id" value="1"/>
         </insert>
         <insert tableName="album">
             <column name="name" value="Third Album"/>
             <column name="text" value="The third album of one of the best bands in the world."/>
             <column name="cover" value="Awesome Cover"/>
-            <column name="RELEASE_YEAR" value="1995-01-03"/>
+            <column name="release_year" value="1995-01-03"/>
+            <column name="label_id" value="1"/>
         </insert>
     </changeSet>
 

@@ -118,4 +118,14 @@
                                  constraintName="public_playlist_label" referencedTableName="label"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="20230720_create_foreign_key_album_label" author="pit">
+        <addForeignKeyConstraint baseTableName="album" baseColumnNames="label_id"
+                                 constraintName="album_label" referencedTableName="label"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="20230720_create_foreign_key_album_presskit" author="pit">
+        <addForeignKeyConstraint baseTableName="album" baseColumnNames="presskit_id"
+                                 constraintName="album_presskit" referencedTableName="presskit"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
