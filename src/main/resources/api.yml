@@ -198,6 +198,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PublicPlaylistView'
+    post:
+      summary: Creates public playlist
+      operationId: createPublicPlaylist
+      tags:
+        - public-playlist-controller
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PublicPlaylistCreateDTO'
+      responses:
+        201:
+          description: 'Public Playlist created.'
   /instrument:
     get:
       summary: Returns all instruments
@@ -528,6 +541,8 @@ components:
           format: byte
         visible:
           type: boolean
+        label:
+          $ref: '#/components/schemas/LabelView'
     InstrumentView:
       type: object
       properties:
@@ -725,6 +740,15 @@ components:
       properties:
         playlist:
           $ref: '#/components/schemas/PrivatePlaylistView'
+        titles:
+          type: array
+          items:
+            type: integer
+    PublicPlaylistCreateDTO:
+      type: object
+      properties:
+        playlist:
+          $ref: '#/components/schemas/PublicPlaylistView'
         titles:
           type: array
           items:

@@ -1,6 +1,5 @@
 package com.htwk.musikdatenbank.entities.privateplaylist
 
-import com.htwk.musikdatenbank.entities.title.TitleConverter
 import com.htwk.musikdatenbank.entities.user.UsersConverter
 import com.htwk.musikdatenbank.services.MusicService
 import org.mapstruct.factory.Mappers
@@ -29,6 +28,7 @@ class PrivatePlaylistController(
         return ResponseEntity.ok(privatePlaylists)
     }
 
+    @PreAuthorize("hasRole('USER')")
     override fun createPrivatePlaylist(privatePlaylistCreateDTO: PrivatePlaylistCreateDTO?): ResponseEntity<Unit> {
         if (privatePlaylistCreateDTO?.playlist == null || privatePlaylistCreateDTO.titles == null || privatePlaylistCreateDTO.titles!!.isEmpty() || privatePlaylistCreateDTO.playlist!!.user == null) {
             return ResponseEntity.badRequest().build()

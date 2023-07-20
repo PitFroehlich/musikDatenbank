@@ -104,6 +104,12 @@ class MusicService(
 
     }
 
+    fun createPublicPlaylist(playlist: PublicPlaylist, titles: List<Long>) {
+        this.publicPlaylistRepository.save(playlist)
+
+        titles.forEach { this.publicPlaylistRepository.createPlaylist(playlist.id, it) }
+    }
+
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 

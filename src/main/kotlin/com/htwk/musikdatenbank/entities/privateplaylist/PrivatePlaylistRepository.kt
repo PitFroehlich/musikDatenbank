@@ -11,6 +11,6 @@ interface PrivatePlaylistRepository : CrudRepository<PrivatePlaylist, Long> {
 
     @Modifying
     @Transactional
-    @Query("insert into private_playlist_title_link ( private_playlist_id, title_id) VALUES (?1, ?2)" , nativeQuery = true)
+    @Query("INSERT INTO private_playlist_title_link ( private_playlist_id, title_id) VALUES (?1, ?2)" , nativeQuery = true)
     fun createPlaylist(playlistId: Long, titleId: Long)
 }
