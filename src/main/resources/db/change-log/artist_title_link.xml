@@ -12,4 +12,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230720" author="pit">
+        <insert tableName="artist_title_link">
+            <column name="title_id" value="1"/>
+            <column name="artist_id" value="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
