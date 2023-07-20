@@ -13,6 +13,5 @@ class Audio(
     @JoinColumn(name = "label_id", referencedColumnName = "id")
     var label: Label,
     var wav: ByteArray,
-    var mp3: ByteArray,
 
 )
