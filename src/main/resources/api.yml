@@ -249,22 +249,16 @@ paths:
           in: query
           required: false
           schema:
-            type: array
-            items:
               type: integer
         - name: genre
           in: query
           required: false
           schema:
-            type: array
-            items:
               type: integer
         - name: instrument
           in: query
           required: false
           schema:
-            type: array
-            items:
               type: integer
 
           description: the song tempo you search for

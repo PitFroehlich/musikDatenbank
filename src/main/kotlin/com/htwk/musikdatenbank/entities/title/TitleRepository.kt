@@ -46,6 +46,33 @@ interface TitleRepository :
     fun search(keyword: String): List<Title>
 
     @Query(
+        """SELECT DISTINCT t.*
+FROM title t
+JOIN mood_title_link mt ON t.id = mt.title_id
+JOIN instrument_title_link it ON t.id = it.title_id
+JOIN genre_title_link gt ON t.id = gt.title_id
+WHERE t.bpm = ?1 AND mt.mood_id = ?2 AND it.instrument_id = ?3 AND gt.genre_id = ?4 ;""", nativeQuery = true
+    )
+    fun tagSearchAND(
+                     tempo: Int?,
+                     mood: Long?,
+                     genre: Long?,
+                     instrument: Long?): List<Title>
+    @Query(
+        """SELECT DISTINCT t.*
+FROM title t
+JOIN mood_title_link mt ON t.id = mt.title_id
+JOIN instrument_title_link it ON t.id = it.title_id
+JOIN genre_title_link gt ON t.id = gt.title_id
+WHERE t.bpm = ?1 OR mt.mood_id = ?2 OR it.instrument_id = ?3 OR gt.genre_id = ?4 ;""", nativeQuery = true
+    )
+    fun tagSearchOR(
+                     tempo: Int?,
+                     mood: Long?,
+                     genre: Long?,
+                     instrument: Long?): List<Title>
+
+    @Query(
         value = "SELECT t.* " +
                 "FROM title t " +
                 "LEFT JOIN ( " +

@@ -23,9 +23,9 @@ class TitleController(
     override fun searchTitles(
         keyword: String?,
         tempo: Int?,
-        mood: List<Int>?,
-        genre: List<Int>?,
-        instrument: List<Int>?
+        mood: Int?,
+        genre: Int?,
+        instrument: Int?
     ): ResponseEntity<List<TitleView>> {
         val titles =
             musicService.searchTitle(keyword, tempo, mood, genre, instrument).map { converter.convertToView(it) }

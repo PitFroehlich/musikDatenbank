@@ -102,27 +102,37 @@ class MusicService(
     fun searchTitle(
         keyword: String?,
         tempo: Int?,
-        mood: List<Int>?,
-        genre: List<Int>?,
-        instrument: List<Int>?
+        mood: Int?,
+        genre: Int?,
+        instrument: Int?
     ): Iterable<Title> {
         if (
-            keyword.isNullOrEmpty()
-            && mood.toString().isNullOrEmpty()
-            && genre.toString().isNullOrEmpty()
-            && instrument.toString().isNullOrEmpty()
+            keyword == null
+            && mood == null
+            && genre == null
+            && instrument == null
         ) {
+            print(">>>> We are in the most popular $keyword $mood $genre $instrument")
             return titleRepository.showMostPopular()
         } else {
             if (keyword.isNullOrEmpty()) {
-                //titleRepository.search(tempo, mood, genre, instrument)
-
-                return titleRepository.findAll()
+                print(">>>>>> We are in the Tagsearch $tempo $mood $genre $instrument")
+                val moodLong = mood?.toLong()
+                val genreLong = genre?.toLong()
+                val instrumentLong = instrument?.toLong()
+                val resultAND = titleRepository.tagSearchAND(tempo, moodLong, genreLong, instrumentLong)
+                if (resultAND.isNullOrEmpty()) {
+                    return titleRepository.tagSearchOR(tempo, moodLong, genreLong, instrumentLong)
+                } else {
+                    return resultAND
+                }
             } else {
-                if (mood.isNullOrEmpty()
-                    && genre.isNullOrEmpty()
-                    && instrument.isNullOrEmpty()
+                if (mood == null
+                    && genre == null
+                    && instrument == null
                 ) {
+                    print(">>>>>> We are in the Fulltext Search")
+
                     val keywordReplaced = keyword.replace(Regex("\\s{2,}"), " ")
                     val keywordTrimmed = keywordReplaced.trimEnd()
                     val keywordSeperated = keywordTrimmed.split(" ").toTypedArray()
@@ -135,7 +145,10 @@ class MusicService(
                         return searchStringANDResult
                     }
                 } else {
+                    print(">>>>>> We are in the Fallback Search")
+
                     return titleRepository.findAll()
+
                     //titleRepository.search(keyword, tempo, mood, genre, instrument)
 
                 }
