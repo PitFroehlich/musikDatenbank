@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
-import java.io.BufferedInputStream
-import java.io.ByteArrayInputStream
-import java.io.InputStream
-import java.net.URLConnection
 
 
 @RestController

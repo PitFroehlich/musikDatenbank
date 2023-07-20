@@ -16,15 +16,15 @@ interface TitleRepository :
                     WHERE MATCH(t.name) AGAINST (?1 IN BOOLEAN MODE)
                     UNION
                     SELECT t.id, t.name, MATCH(p.name) AGAINST (?1 IN BOOLEAN MODE) AS relevance
-                    FROM public_playlist_title_link ptl
-                    JOIN public_playlist p ON ptl.public_playlist_id = p.id
-                    JOIN title t ON ptl.title_id = t.id
+                    FROM public_playlist_title_link putl
+                    JOIN public_playlist p ON putl.public_playlist_id = p.id
+                    JOIN title t ON putl.title_id = t.id
                     WHERE MATCH(p.name) AGAINST (?1 IN BOOLEAN MODE)
                     UNION
                     SELECT t.id, t.name, MATCH(p.name) AGAINST (?1 IN BOOLEAN MODE) AS relevance
-                    FROM private_playlist_title_link ptl
-                    JOIN private_playlist p ON ptl.private_playlist_id = p.id
-                    JOIN title t ON ptl.title_id = t.id
+                    FROM private_playlist_title_link prtl
+                    JOIN private_playlist p ON prtl.private_playlist_id = p.id
+                    JOIN title t ON prtl.title_id = t.id
                     WHERE MATCH(p.name) AGAINST (?1 IN BOOLEAN MODE)
                     UNION
                     SELECT t.id, t.name, MATCH(a.name) AGAINST (?1 IN BOOLEAN MODE) AS relevance
@@ -34,9 +34,9 @@ interface TitleRepository :
                     WHERE MATCH(a.name) AGAINST (?1 IN BOOLEAN MODE)
                     UNION
                     SELECT t.id, t.name, MATCH(al.name) AGAINST (?1 IN BOOLEAN MODE) AS relevance
-                    FROM album_title_link atl
-                    JOIN album al ON atl.album_id = al.id
-                    JOIN title t ON atl.title_id = t.id
+                    FROM album_title_link altl
+                    JOIN album al ON altl.album_id = al.id
+                    JOIN title t ON altl.title_id = t.id
                     WHERE MATCH(al.name) AGAINST (?1 IN BOOLEAN MODE)
                 ) ranked_titles
                 JOIN title ON ranked_titles.id = title.id
