@@ -23,13 +23,14 @@ class AudioController(
         return ResponseEntity.ok(audios)
     }
 
-    override fun getAudioFile(audioId: String): ResponseEntity<ByteArray> {
+    override fun getAudioFile(audioId: Int): ResponseEntity<ByteArray> {
+
         val audioFile = musicService.getAudioFile(audioId)
         return createResponseEntity(audioFile, "download.wav")
     }
 
-    override fun postAudio(labelId: Int, wav: Resource): ResponseEntity<AudioView> {
-        val audio = musicService.postAudio(labelId, wav)
+    override fun postAudio(labelId: Int, titleId: Int, wav: Resource): ResponseEntity<AudioView> {
+        val audio = musicService.postAudio(labelId, wav,titleId)
         return ResponseEntity.ok(converter.convertToView(audio))
     }
 

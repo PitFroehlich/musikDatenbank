@@ -136,12 +136,15 @@ paths:
               properties:
                 labelId:
                   type: integer
+                titleId:
+                  type: integer
                 wav:
                   type: string
                   format: binary
               required:
                 - labelId
                 - wav
+                - titleId
       responses:
         "200":
           description: Represents audio from db
@@ -173,7 +176,7 @@ paths:
           description: The ID of the audio file to retrieve
           required: true
           schema:
-            type: string
+            type: integer
       tags:
         - audio-controller
       responses:

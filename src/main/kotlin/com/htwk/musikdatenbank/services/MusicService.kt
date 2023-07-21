@@ -18,6 +18,8 @@ import com.htwk.musikdatenbank.entities.links.album_title_link.AlbumTitleLinkCon
 import com.htwk.musikdatenbank.entities.links.album_title_link.AlbumTitleLinkRepository
 import com.htwk.musikdatenbank.entities.links.artist_title_link.ArtistTitleLink
 import com.htwk.musikdatenbank.entities.links.artist_title_link.ArtistTitleLinkRepository
+import com.htwk.musikdatenbank.entities.links.audio_title_link.AudioTitleLink
+import com.htwk.musikdatenbank.entities.links.audio_title_link.AudioTitleLinkRepository
 import com.htwk.musikdatenbank.entities.links.genre_title_link.GenreTitleLink
 import com.htwk.musikdatenbank.entities.links.genre_title_link.GenreTitleLinkRepository
 import com.htwk.musikdatenbank.entities.links.instrument_title_link.InstrumentTitleLink
@@ -62,6 +64,7 @@ class MusicService(
     val artistTitleLinkRepository: ArtistTitleLinkRepository,
     val genreTitleLinkRepository: GenreTitleLinkRepository,
     val instrumentTitleLinkRepository: InstrumentTitleLinkRepository,
+    val audioTitleLinkRepository: AudioTitleLinkRepository,
     private val genreRepository: GenreRepository,
     private val titleRepository: TitleRepository,
     private val artistRepository: ArtistRepository,
@@ -206,15 +209,18 @@ class MusicService(
     /*--------------------------------------------Audio---------------------------------------*/
     fun getAllAudios(): MutableIterable<Audio> = audioRepository.findAll()
 
-    fun getAudioFile(audioId: String): ByteArray {
-        val audio = audioRepository.findById(audioId.toLong())
+    fun getAudioFile(audioId: Int): ByteArray {
+        val audioTitleLink = audioTitleLinkRepository.findByTitleId(audioId.toLong())
+        val audio = audioRepository.findById(audioTitleLink.audioId)
         return audio.get().wav
     }
 
-    fun postAudio(labelId: Int, wav: Resource): Audio {
+    fun postAudio(labelId: Int, wav: Resource, titleId: Int): Audio {
         val byteArray = wav.contentAsByteArray
         val label = labelRepository.findById(labelId.toLong()).orElseThrow()
-        return audioRepository.save(audioConverter.convertToAudio(label, byteArray))
+        val audio = audioRepository.save(audioConverter.convertToAudio(label, byteArray))
+        audioTitleLinkRepository.save(AudioTitleLink(id = null, titleId = titleId.toLong(), audioId = audio.id))
+        return audio
     }
 
     /*--------------------------------------------Title---------------------------------------*/
@@ -235,7 +241,7 @@ class MusicService(
         )
         val storedTitle = this.titleRepository.save(title)
 
-        postAudio(label.get().id.toInt(), ByteArrayResource(titleUploadDto.wav))
+        postAudio(label.get().id.toInt(), ByteArrayResource(titleUploadDto.wav), title.id!!.toInt())
 
         // Check all tags like moods, artists, instruments and genres
         // Then check if those already exist (by checking their names in the regarding tables) and either add them or only create a link to the existing one with the title
