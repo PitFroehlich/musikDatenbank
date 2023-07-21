@@ -1,7 +1,9 @@
 package com.htwk.musikdatenbank.entities.album
 
+import com.htwk.musikdatenbank.entities.label.Label
+import com.htwk.musikdatenbank.entities.presskit.Presskit
 import jakarta.persistence.*
-import java.util.Date
+import java.util.*
 
 @Entity
 class Album (
@@ -14,4 +16,11 @@ class Album (
     var cover: ByteArray,
     @Column(name = "release_year")
     var releaseDate: Date,
-)
+    @ManyToOne
+    @JoinColumn(name = "label_id", referencedColumnName = "id")
+    var labelId: Label,
+    @ManyToOne
+    @JoinColumn(name = "presskit_id", referencedColumnName = "id")
+    var presskitId: Presskit
+
+    )

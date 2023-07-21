@@ -12,4 +12,26 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230721" author="pit">
+        <insert tableName="album_title_link">
+            <column name="title_id" value="1"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="album_title_link">
+            <column name="title_id" value="2"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="album_title_link">
+            <column name="title_id" value="3"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="album_title_link">
+            <column name="title_id" value="4"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="album_title_link">
+            <column name="title_id" value="5"/>
+            <column name="album_id" value="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

@@ -15,4 +15,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20230721" author="pit">
+        <insert tableName="presskit">
+            <column name="image" value="123"/>
+            <column name="pdf" value="123"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

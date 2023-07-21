@@ -91,4 +91,7 @@ WHERE t.bpm = ?1 OR mt.mood_id = ?2 OR it.instrument_id = ?3 OR gt.genre_id = ?4
                 "LIMIT 10", nativeQuery = true
     )
     fun showMostPopular(): List<Title>
+
+    @Query("SELECT title.* FROM title JOIN album_title_link ON title.id = album_title_link.title_id WHERE album_title_link.album_id = ?1", nativeQuery = true)
+    fun findTitlesFromAlbum(albumId: Long): List<Title>
 }

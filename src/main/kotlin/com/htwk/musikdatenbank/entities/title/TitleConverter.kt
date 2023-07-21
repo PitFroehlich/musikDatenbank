@@ -1,7 +1,6 @@
 package com.htwk.musikdatenbank.entities.title
 
 import com.htwk.musikdatenbank.entities.label.Label
-import com.htwk.musikdatenbank.helpers.Converter
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.openapitools.model.TitleView
@@ -14,4 +13,6 @@ interface TitleConverter {
      fun convertToEntity(view: TitleView, label: Label): Title
 
      fun convertToView(entity: Title): TitleView
+
+     fun toListView(entity: List<Title>): List<TitleView>
 }

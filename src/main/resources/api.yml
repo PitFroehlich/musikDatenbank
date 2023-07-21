@@ -394,9 +394,61 @@ paths:
           content:
             'application/json':
               schema:
+                  $ref: '#/components/schemas/AlbumView'
+  /albumTitles:
+    get:
+      summary: Returns Titles that are part of the requested album
+      operationId: getAlbumTitles
+      parameters:
+        - name: albumId
+          in: query
+          required: true
+          schema:
+            type: integer
+      tags:
+        - album-controller
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AlbumView'
+                  $ref: '#/components/schemas/TitleView'
+    post:
+      summary: Adds Title to Album
+      operationId: addTitleToAlbum
+      tags:
+        - album-controller
+      parameters:
+        - name: titleId
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: albumId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Adds Title to Album
+      operationId: deleteTitleFromAlbum
+      tags:
+        - album-controller
+      parameters:
+        - name: albumTitleLinkId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
   /album:
     get:
       summary: Returns all albums
@@ -412,6 +464,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AlbumView'
+
     post:
       summary: Uploads an album to the db
       tags:
@@ -444,6 +497,8 @@ paths:
                 - image
                 - text
                 - labelId
+                - presskitId
+                - titles
       responses:
         "200":
           description: Represents audio from db
@@ -804,10 +859,10 @@ components:
         releaseDate:
           type: string
           format: date
-        labelId:
-          type: integer
+        label:
+          $ref: '#/components/schemas/LabelView'
         presskitId:
-          type: integer
+          $ref: '#/components/schemas/PresskitView'
     PresskitView:
       type: object
       properties:

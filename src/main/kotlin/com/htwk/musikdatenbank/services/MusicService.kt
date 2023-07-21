@@ -14,6 +14,8 @@ import com.htwk.musikdatenbank.entities.instrument.Instrument
 import com.htwk.musikdatenbank.entities.instrument.InstrumentRepository
 import com.htwk.musikdatenbank.entities.label.Label
 import com.htwk.musikdatenbank.entities.label.LabelRepository
+import com.htwk.musikdatenbank.entities.links.album_title_link.AlbumTitleLinkConverter
+import com.htwk.musikdatenbank.entities.links.album_title_link.AlbumTitleLinkRepository
 import com.htwk.musikdatenbank.entities.links.artist_title_link.ArtistTitleLink
 import com.htwk.musikdatenbank.entities.links.artist_title_link.ArtistTitleLinkRepository
 import com.htwk.musikdatenbank.entities.links.genre_title_link.GenreTitleLink
@@ -50,39 +52,65 @@ import java.time.LocalDate
 
 @Service
 class MusicService(
-        val moodRepository: MoodRepository,
-        val ownerRepository: OwnerRepository,
-        val instrumentRepository: InstrumentRepository,
-        val publicPlaylistRepository: PublicPlaylistRepository,
-        val audioRepository: AudioRepository,
-        val moodTitleLinkRepository: MoodTitleLinkRepository,
-        val artistTitleLinkRepository: ArtistTitleLinkRepository,
-        val genreTitleLinkRepository: GenreTitleLinkRepository,
-        val instrumentTitleLinkRepository: InstrumentTitleLinkRepository,
-        private val genreRepository: GenreRepository,
-        private val titleRepository: TitleRepository,
-        private val artistRepository: ArtistRepository,
-        private val albumRepository: AlbumRepository,
-        private val presskitRepository: PresskitRepository,
-        private val privatePlaylistRepository: PrivatePlaylistRepository,
-        private val usersRepository: UsersRepository,
-        private val labelRepository: LabelRepository,
+    val moodRepository: MoodRepository,
+    val ownerRepository: OwnerRepository,
+    val instrumentRepository: InstrumentRepository,
+    val publicPlaylistRepository: PublicPlaylistRepository,
+    val audioRepository: AudioRepository,
+    val moodTitleLinkRepository: MoodTitleLinkRepository,
+    val artistTitleLinkRepository: ArtistTitleLinkRepository,
+    val genreTitleLinkRepository: GenreTitleLinkRepository,
+    val instrumentTitleLinkRepository: InstrumentTitleLinkRepository,
+    private val genreRepository: GenreRepository,
+    private val titleRepository: TitleRepository,
+    private val artistRepository: ArtistRepository,
+    private val albumRepository: AlbumRepository,
+    private val presskitRepository: PresskitRepository,
+    private val privatePlaylistRepository: PrivatePlaylistRepository,
+    private val usersRepository: UsersRepository,
+    private val labelRepository: LabelRepository,
+    private val albumTitleLinkRepository: AlbumTitleLinkRepository
 
-        ) {
+    ) {
     val audioConverter: AudioConverter = Mappers.getMapper(AudioConverter::class.java)
     val pressKitConverter: PresskitConverter = Mappers.getMapper(PresskitConverter::class.java)
     val albumConverter: AlbumConverter = Mappers.getMapper(AlbumConverter::class.java)
-
+    val albumTitleLinkConverter: AlbumTitleLinkConverter = Mappers.getMapper(AlbumTitleLinkConverter::class.java)
     /*--------------------------------------------Album---------------------------------------*/
     fun getAllAlbums(): MutableIterable<Album> = albumRepository.findAll()
 
-    fun postAlbum(year: LocalDate,
-                  image: Resource,
-                  text: String,
-                  labelId: Int,
-                  presskitId: Int?): Album{
-      return albumRepository.save(albumConverter.toEntity(year, image, text, labelId, presskitId))
+    fun getAlbum(albumId: Int): Album {
+        return albumRepository.findById(albumId.toLong()).orElseThrow()
     }
+
+    fun getAlbumTitles(albumId: Int): List<Title> {
+        val titleListe = titleRepository.findTitlesFromAlbum(albumId.toLong())
+        return titleListe
+    }
+
+    fun addTitleToAlbum(titleId: Int, albumId: Int) {
+        albumTitleLinkRepository.addTitleToAlbum(titleId.toLong(), albumId.toLong())
+    }
+
+    fun deleteTitleFromAlbum(albumTitleLinkId: Int) {
+        albumTitleLinkRepository.deleteTitleFromAlbum(albumTitleLinkId)
+    }
+
+    fun postAlbum(
+        name: String,
+        year: LocalDate,
+        image: Resource,
+        text: String,
+        labelId: Int,
+        presskitId: Int,
+    ): Album {
+            val label = labelRepository.findById(labelId.toLong()).orElseThrow()
+            val presskit = presskitRepository.findById(presskitId.toLong()).orElseThrow()
+            val cover = image.contentAsByteArray
+            return albumRepository.save(albumConverter.toEntity(name, year, cover, text, label, presskit))
+        }
+
+
 
     /*--------------------------------------------Artist---------------------------------------*/
     fun getAllArtists(): MutableIterable<Artist> = artistRepository.findAll()
@@ -138,10 +166,10 @@ class MusicService(
 //            ) {
         if (image == null || pdf == null) {
             throw Exception("Input is null")
-       }
-/*        if (!checkContentType(image, "image/jpeg")) {
-            throw Exception("Wrong Image Format")
-        }*/
+        }
+        /*        if (!checkContentType(image, "image/jpeg")) {
+                    throw Exception("Wrong Image Format")
+                }*/
         /*if (!checkContentType(pdf, "image/jpeg")) {
             throw Exception("PDF RIP")
         }*/
@@ -194,7 +222,16 @@ class MusicService(
     fun uploadTitle(titleUploadDto: TitleUploadDto) {
         val label = labelRepository.findById(titleUploadDto.labelId.toLong())
 
-        val title = Title(name = titleUploadDto.name, bpm = titleUploadDto.bpm, cover = titleUploadDto.cover, gemaNr = titleUploadDto.gemaNr, releaseDate = Date.valueOf(titleUploadDto.releaseDate), visible = titleUploadDto.visible, label = label.get(), id = null)
+        val title = Title(
+            name = titleUploadDto.name,
+            bpm = titleUploadDto.bpm,
+            cover = titleUploadDto.cover,
+            gemaNr = titleUploadDto.gemaNr,
+            releaseDate = Date.valueOf(titleUploadDto.releaseDate),
+            visible = titleUploadDto.visible,
+            label = label.get(),
+            id = null
+        )
         val storedTitle = this.titleRepository.save(title)
 
 
@@ -204,10 +241,22 @@ class MusicService(
             titleUploadDto.moods.forEach {
                 val mood = moodRepository.findByName(it)
                 if (mood.isPresent && mood.get().id != null) {
-                    moodTitleLinkRepository.save(MoodTitleLink(moodId = mood.get().id!!, titleId = storedTitle.id, id = null))
+                    moodTitleLinkRepository.save(
+                        MoodTitleLink(
+                            moodId = mood.get().id!!,
+                            titleId = storedTitle.id,
+                            id = null
+                        )
+                    )
                 } else {
                     val newMood = moodRepository.save(Mood(id = null, name = it))
-                    moodTitleLinkRepository.save(MoodTitleLink(moodId = newMood.id!!, titleId = storedTitle.id, id = null))
+                    moodTitleLinkRepository.save(
+                        MoodTitleLink(
+                            moodId = newMood.id!!,
+                            titleId = storedTitle.id,
+                            id = null
+                        )
+                    )
                 }
             }
 
@@ -215,30 +264,67 @@ class MusicService(
                 val artist = artistRepository.findByName(it)
 
                 if (artist.isPresent && artist.get().id != null) {
-                    artistTitleLinkRepository.save(ArtistTitleLink(id = null, titleId = storedTitle.id, artistId = artist.get().id!!))
+                    artistTitleLinkRepository.save(
+                        ArtistTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            artistId = artist.get().id!!
+                        )
+                    )
                 } else {
-                    val newArtist = artistRepository.save(Artist(id = null, name = it, image = ByteArray(0), biography = ""))
-                    artistTitleLinkRepository.save(ArtistTitleLink(id = null, titleId = storedTitle.id, artistId = newArtist.id!!))
+                    val newArtist =
+                        artistRepository.save(Artist(id = null, name = it, image = ByteArray(0), biography = ""))
+                    artistTitleLinkRepository.save(
+                        ArtistTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            artistId = newArtist.id!!
+                        )
+                    )
                 }
             }
 
             titleUploadDto.genres.forEach {
                 val genre = genreRepository.findByName(it)
                 if (genre.isPresent && genre.get().id != null) {
-                    genreTitleLinkRepository.save(GenreTitleLink(id = null, titleId = storedTitle.id, genreId = genre.get().id!!))
+                    genreTitleLinkRepository.save(
+                        GenreTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            genreId = genre.get().id!!
+                        )
+                    )
                 } else {
                     val newGenre = genreRepository.save(Genre(id = null, name = it))
-                    genreTitleLinkRepository.save(GenreTitleLink(id = null, titleId = storedTitle.id, genreId = newGenre.id!!))
+                    genreTitleLinkRepository.save(
+                        GenreTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            genreId = newGenre.id!!
+                        )
+                    )
                 }
             }
 
             titleUploadDto.instruments.forEach {
                 val instrument = instrumentRepository.findByName(it)
                 if (instrument.isPresent && instrument.get().id != null) {
-                    instrumentTitleLinkRepository.save(InstrumentTitleLink(id = null, titleId = storedTitle.id, instrumentId = instrument.get().id!!))
+                    instrumentTitleLinkRepository.save(
+                        InstrumentTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            instrumentId = instrument.get().id!!
+                        )
+                    )
                 } else {
                     val newInstrument = instrumentRepository.save(Instrument(id = null, name = it))
-                    instrumentTitleLinkRepository.save(InstrumentTitleLink(id = null, titleId = storedTitle.id, instrumentId = newInstrument.id!!))
+                    instrumentTitleLinkRepository.save(
+                        InstrumentTitleLink(
+                            id = null,
+                            titleId = storedTitle.id,
+                            instrumentId = newInstrument.id!!
+                        )
+                    )
                 }
             }
         }
@@ -251,17 +337,17 @@ class MusicService(
     }
 
     fun searchTitle(
-            keyword: String?,
-            tempo: Int?,
-            mood: Int?,
-            genre: Int?,
-            instrument: Int?
+        keyword: String?,
+        tempo: Int?,
+        mood: Int?,
+        genre: Int?,
+        instrument: Int?
     ): Iterable<Title> {
         if (
-                keyword.isNullOrEmpty()
-                && mood == null
-                && genre == null
-                && instrument == null
+            keyword.isNullOrEmpty()
+            && mood == null
+            && genre == null
+            && instrument == null
         ) {
             return titleRepository.showMostPopular()
         } else {
@@ -277,8 +363,8 @@ class MusicService(
                 }
             } else {
                 if (mood == null
-                        && genre == null
-                        && instrument == null
+                    && genre == null
+                    && instrument == null
                 ) {
                     val searchStringAND = searchStringAndCreator(keyword)
                     val searchStringANDResult = titleRepository.search(searchStringAND)
