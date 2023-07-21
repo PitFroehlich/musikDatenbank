@@ -9,6 +9,7 @@ import org.openapitools.model.AlbumView
 import org.openapitools.model.TitleView
 import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
@@ -51,11 +52,11 @@ class AlbumController(
         val titleList = musicService.getAlbumTitles(albumId)
         return ResponseEntity.ok(titleConverter.toListView(titleList))
     }
-
+    @PreAuthorize("hasRole('LABEL')")
     override fun addTitleToAlbum(titleId: Int, albumId: Int): ResponseEntity<Unit> {
         return ResponseEntity.ok(musicService.addTitleToAlbum(titleId, albumId))
     }
-
+    @PreAuthorize("hasRole('LABEL')")
     override fun deleteTitleFromAlbum(albumTitleLinkId: Int): ResponseEntity<Unit> {
        return ResponseEntity.ok(musicService.deleteTitleFromAlbum(albumTitleLinkId))
     }
