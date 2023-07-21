@@ -394,7 +394,6 @@ class MusicService(
                             val resultTagOr = titleRepository.tagSearchOR(tempo, moodLong, genreLong, instrumentLong)
                             val resultOrKeywordANDORTag = resultORKeywordANDTag.intersect(resultTagOr)
                             if (resultOrKeywordANDORTag.isNullOrEmpty()) {
-                                print(">>>> We are here ")
                                 return resultORKeywordANDTag + resultTagOr
                             } else {
                                 return resultOrKeywordANDORTag
