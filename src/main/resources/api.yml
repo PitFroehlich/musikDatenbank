@@ -482,7 +482,7 @@ paths:
                   type: string
                   format: date
                   example: "2021-01-30"
-                image:
+                file:
                   type: string
                   format: binary
                 text:
@@ -498,7 +498,7 @@ paths:
                 - text
                 - labelId
                 - presskitId
-                - titles
+                - file
       responses:
         "200":
           description: Represents audio from db
