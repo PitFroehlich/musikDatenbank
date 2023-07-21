@@ -41,8 +41,8 @@ import com.htwk.musikdatenbank.entities.user.Users
 import com.htwk.musikdatenbank.entities.user.UsersRepository
 import org.mapstruct.factory.Mappers
 import org.openapitools.model.PresskitView
-import org.springframework.core.io.ByteArrayResource
 import org.openapitools.model.TitleUploadDto
+import org.springframework.core.io.ByteArrayResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import java.io.ByteArrayInputStream
@@ -171,8 +171,8 @@ class MusicService(
         /*        if (!checkContentType(image, "image/jpeg")) {
                     throw Exception("Wrong Image Format")
                 }*/
-        /*if (!checkContentType(pdf, "image/jpeg")) {
-            throw Exception("PDF RIP")
+        /*if (!checkContentType(pdf, "application/pdf")) {
+            throw Exception("This is not a pdf file format")
         }*/
         //
         val presskit =
