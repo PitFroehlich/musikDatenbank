@@ -685,9 +685,6 @@ components:
           type: integer
         label:
           $ref: '#/components/schemas/LabelView'
-        mp3:
-          type: string
-          format: byte
         wav:
           type: string
           format: byte

@@ -10,6 +10,7 @@ import org.openapitools.model.TitleUploadDto
 import org.openapitools.model.TitleView
 import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestPart
@@ -42,6 +43,7 @@ class TitleController(
         return ResponseEntity.ok(titles)
     }
 
+    @PreAuthorize("hasRole('LABEL')")
     override fun uploadTitle(titleUploadDto: TitleUploadDto?): ResponseEntity<Unit> {
         if(titleUploadDto == null) {
             return ResponseEntity.badRequest().build()

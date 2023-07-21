@@ -41,6 +41,7 @@ import com.htwk.musikdatenbank.entities.user.Users
 import com.htwk.musikdatenbank.entities.user.UsersRepository
 import org.mapstruct.factory.Mappers
 import org.openapitools.model.PresskitView
+import org.springframework.core.io.ByteArrayResource
 import org.openapitools.model.TitleUploadDto
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
@@ -234,6 +235,7 @@ class MusicService(
         )
         val storedTitle = this.titleRepository.save(title)
 
+        postAudio(label.get().id.toInt(), ByteArrayResource(titleUploadDto.wav))
 
         // Check all tags like moods, artists, instruments and genres
         // Then check if those already exist (by checking their names in the regarding tables) and either add them or only create a link to the existing one with the title
